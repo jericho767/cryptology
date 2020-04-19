@@ -20,7 +20,7 @@ class Game extends BaseModel
     /**
      * @var int Number of teams to be playing in a game
      */
-    const MAX_NUMBER_OF_TEAMS = 2;
+    const MAX_NUMBER_OF_PLAYING_TEAMS = 2;
     /**
      * @var int Minimum number of players per team in order to play
      */
