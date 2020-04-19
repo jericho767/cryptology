@@ -3,6 +3,8 @@
 namespace App;
 
 use App\Models\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Game extends BaseModel
 {
@@ -24,22 +26,22 @@ class Game extends BaseModel
      */
     const MIN_PLAYERS_PER_TEAM = 2;
 
-    public function mapBlocks()
+    public function mapBlocks(): HasMany
     {
         return $this->hasMany(GameMap::class, 'game_id', 'id');
     }
 
-    public function winner()
+    public function winner(): BelongsTo
     {
         return $this->belongsTo(GameTeam::class, 'winner', 'id');
     }
 
-    public function participants()
+    public function participants(): HasMany
     {
         return $this->hasMany(GameTeam::class, 'game_id', 'id');
     }
 
-    public function creator()
+    public function creator(): BelongsTo
     {
         return $this->belongsTo(Player::class, 'created_by', 'id');
     }

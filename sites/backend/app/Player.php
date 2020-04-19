@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Models\BaseModel;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Player extends BaseModel
 {
@@ -24,22 +25,22 @@ class Player extends BaseModel
      */
     const PHONE_NUMBER_MAX_LENGTH = 11;
 
-    public function gamesCreated()
+    public function gamesCreated(): HasMany
     {
         return $this->hasMany(Game::class, 'created_by', 'id');
     }
 
-    public function teams()
+    public function teams(): HasMany
     {
         return $this->hasMany(GameTeamPlayer::class, 'player_id', 'id');
     }
 
-    public function activities()
+    public function activities(): HasMany
     {
         return $this->hasMany(PlayerActivity::class, 'player_id', 'id');
     }
 
-    public function gameMasterOfGames()
+    public function gameMasterOfGames(): HasMany
     {
         return $this->hasMany(GameTeam::class, 'game_master', 'id');
     }

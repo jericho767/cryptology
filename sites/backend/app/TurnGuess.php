@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Models\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class TurnGuess extends BaseModel
 {
@@ -11,12 +12,12 @@ class TurnGuess extends BaseModel
     public $incrementing = false;
     protected $fillable = ['game_turn_id', 'game_map_id'];
 
-    public function gameMap()
+    public function gameMap(): BelongsTo
     {
         return $this->belongsTo(GameMap::class, 'game_map_id', 'id');
     }
 
-    public function gameTurn()
+    public function gameTurn(): BelongsTo
     {
         return $this->belongsTo(GameTurn::class, 'game_turn_id', 'id');
     }

@@ -9,7 +9,7 @@ class BaseModel extends Model
 {
     use SoftDeletes;
 
-    public function save(array $options = [])
+    public function save(array $options = []): bool
     {
         if (!is_array($this->getKeyName())) {
             return parent::save($options);

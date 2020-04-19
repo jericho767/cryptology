@@ -3,6 +3,9 @@
 namespace App;
 
 use App\Models\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class GameTeam extends BaseModel
 {
@@ -16,27 +19,27 @@ class GameTeam extends BaseModel
      */
     const TEAM_NAME_MAX_LENGTH = 20;
 
-    public function gameWon()
+    public function gameWon(): HasOne
     {
         return $this->hasOne(Game::class, 'winner', 'id');
     }
 
-    public function gameBlocks()
+    public function gameBlocks(): HasMany
     {
         return $this->hasMany(GameMap::class, 'game_team_id', 'id');
     }
 
-    public function gameMaster()
+    public function gameMaster(): BelongsTo
     {
         return $this->belongsTo(Player::class, 'game_master', 'id');
     }
 
-    public function game()
+    public function game(): BelongsTo
     {
         return $this->belongsTo(Game::class, 'game_id', 'id');
     }
 
-    public function players()
+    public function players(): HasMany
     {
         return $this->hasMany(GameTeamPlayer::class, 'game_team_id', 'id');
     }

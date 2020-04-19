@@ -3,6 +3,8 @@
 namespace App;
 
 use App\Models\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class GameTeamPlayer extends BaseModel
 {
@@ -11,17 +13,17 @@ class GameTeamPlayer extends BaseModel
     public $incrementing = false;
     protected $fillable = ['game_team_id', 'player_id'];
 
-    public function gameTeam()
+    public function gameTeam(): BelongsTo
     {
         return $this->belongsTo(GameTeam::class, 'game_team_id', 'id');
     }
 
-    public function player()
+    public function player(): BelongsTo
     {
         return $this->belongsTo(Player::class, 'player_id', 'id');
     }
 
-    public function turnOrder()
+    public function turnOrder(): HasOne
     {
         return $this->hasOne(TurnOrder::class, 'game_team_player_id', 'id');
     }

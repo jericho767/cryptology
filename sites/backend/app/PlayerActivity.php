@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Models\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class PlayerActivity extends BaseModel
 {
@@ -11,7 +12,7 @@ class PlayerActivity extends BaseModel
     public $incrementing = true;
     protected $fillable = ['player_id', 'login_date', 'logout_date'];
 
-    public function player()
+    public function player(): BelongsTo
     {
         return $this->belongsTo(Player::class, 'player_id', 'id');
     }

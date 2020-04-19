@@ -3,6 +3,8 @@
 namespace App;
 
 use App\Models\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class GameMap extends BaseModel
 {
@@ -24,22 +26,22 @@ class GameMap extends BaseModel
      */
     const FIRST_TURN_ADD = 1;
 
-    public function word()
+    public function word(): BelongsTo
     {
         return $this->belongsTo(Word::class, 'word_id', 'id');
     }
 
-    public function guessAt()
+    public function guessAt(): HasOne
     {
         return $this->hasOne(TurnGuess::class, 'game_map_id', 'id');
     }
 
-    public function game()
+    public function game(): BelongsTo
     {
         return $this->belongsTo(Game::class, 'game_id', 'id');
     }
 
-    public function blockOwner()
+    public function blockOwner(): BelongsTo
     {
         return $this->belongsTo(GameTeam::class, 'game_team_id', 'id');
     }
