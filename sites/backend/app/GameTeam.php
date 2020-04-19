@@ -28,7 +28,7 @@ class GameTeam extends BaseModel
 
     public function gameMaster()
     {
-        // TODO Add relation
+        return $this->belongsTo(Player::class, 'game_master', 'id');
     }
 
     public function game()
