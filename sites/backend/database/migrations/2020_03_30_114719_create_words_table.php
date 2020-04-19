@@ -13,7 +13,7 @@ class CreateWordsTable extends Migration
      */
     public function up(): void
     {
-        Schema::create('words', function (Blueprint $table) {
+        Schema::create('words', function (Blueprint $table): void {
             $table->id();
             $table->string('word')->unique();
             $table->timestamps();

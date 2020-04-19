@@ -13,7 +13,7 @@ class AlterGameMapsIdToAi extends Migration
      */
     public function up(): void
     {
-        Schema::table('game_maps', function (Blueprint $table) {
+        Schema::table('game_maps', function (Blueprint $table): void {
             $table->unsignedBigInteger('id', true)->change();
         });
     }
@@ -25,7 +25,7 @@ class AlterGameMapsIdToAi extends Migration
      */
     public function down(): void
     {
-        Schema::table('game_maps', function (Blueprint $table) {
+        Schema::table('game_maps', function (Blueprint $table): void {
             $table->unsignedBigInteger('id', false)->change();
         });
     }

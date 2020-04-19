@@ -13,7 +13,7 @@ class CreatePlayersTable extends Migration
      */
     public function up(): void
     {
-        Schema::create('players', function (Blueprint $table) {
+        Schema::create('players', function (Blueprint $table): void {
             $table->id();
             $table->string('name');
             $table->string('email')->unique();

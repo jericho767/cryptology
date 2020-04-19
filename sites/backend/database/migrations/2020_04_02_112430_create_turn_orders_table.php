@@ -13,7 +13,7 @@ class CreateTurnOrdersTable extends Migration
      */
     public function up(): void
     {
-        Schema::create('turn_orders', function (Blueprint $table) {
+        Schema::create('turn_orders', function (Blueprint $table): void {
             $table->unsignedBigInteger('id')->unique();
             $table->unsignedBigInteger('game_team_player_id');
             $table->unsignedTinyInteger('has_played')->default(0);

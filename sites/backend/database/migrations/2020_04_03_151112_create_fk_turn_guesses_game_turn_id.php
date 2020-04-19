@@ -13,7 +13,7 @@ class CreateFkTurnGuessesGameTurnId extends Migration
      */
     public function up(): void
     {
-        Schema::table('turn_guesses', function (Blueprint $table) {
+        Schema::table('turn_guesses', function (Blueprint $table): void {
             $table->foreign('game_turn_id')
                 ->references('id')
                 ->on('game_turns');
@@ -27,7 +27,7 @@ class CreateFkTurnGuessesGameTurnId extends Migration
      */
     public function down(): void
     {
-        Schema::table('turn_guesses', function (Blueprint $table) {
+        Schema::table('turn_guesses', function (Blueprint $table): void {
             $table->dropForeign('turn_guesses_game_turn_id_foreign');
         });
     }

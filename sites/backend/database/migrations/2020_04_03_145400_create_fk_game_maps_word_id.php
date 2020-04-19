@@ -13,7 +13,7 @@ class CreateFkGameMapsWordId extends Migration
      */
     public function up(): void
     {
-        Schema::table('game_maps', function (Blueprint $table) {
+        Schema::table('game_maps', function (Blueprint $table): void {
             $table->foreign('word_id')
                 ->references('id')
                 ->on('words');
@@ -27,7 +27,7 @@ class CreateFkGameMapsWordId extends Migration
      */
     public function down(): void
     {
-        Schema::table('game_maps', function (Blueprint $table) {
+        Schema::table('game_maps', function (Blueprint $table): void {
             $table->dropForeign('game_maps_word_id_foreign');
         });
     }

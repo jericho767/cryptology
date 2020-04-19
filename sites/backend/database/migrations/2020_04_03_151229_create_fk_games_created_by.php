@@ -13,7 +13,7 @@ class CreateFkGamesCreatedBy extends Migration
      */
     public function up(): void
     {
-        Schema::table('games', function (Blueprint $table) {
+        Schema::table('games', function (Blueprint $table): void {
             $table->foreign('created_by')
                 ->references('id')
                 ->on('players');
@@ -27,7 +27,7 @@ class CreateFkGamesCreatedBy extends Migration
      */
     public function down(): void
     {
-        Schema::table('games', function (Blueprint $table) {
+        Schema::table('games', function (Blueprint $table): void {
             $table->dropForeign('games_created_by_foreign');
         });
     }

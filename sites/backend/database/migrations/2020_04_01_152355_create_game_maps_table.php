@@ -13,7 +13,7 @@ class CreateGameMapsTable extends Migration
      */
     public function up(): void
     {
-        Schema::create('game_maps', function (Blueprint $table) {
+        Schema::create('game_maps', function (Blueprint $table): void {
             $table->unsignedBigInteger('id')->unique();
             $table->unsignedBigInteger('game_id');
             $table->unsignedBigInteger('word_id');

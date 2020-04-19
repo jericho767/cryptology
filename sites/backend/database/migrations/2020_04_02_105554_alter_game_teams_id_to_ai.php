@@ -13,7 +13,7 @@ class AlterGameTeamsIdToAi extends Migration
      */
     public function up(): void
     {
-        Schema::table('game_teams', function (Blueprint $table) {
+        Schema::table('game_teams', function (Blueprint $table): void {
             $table->unsignedBigInteger('id', true)->change();
         });
     }
@@ -25,7 +25,7 @@ class AlterGameTeamsIdToAi extends Migration
      */
     public function down(): void
     {
-        Schema::table('game_teams', function (Blueprint $table) {
+        Schema::table('game_teams', function (Blueprint $table): void {
             $table->unsignedBigInteger('id', false)->change();
         });
     }

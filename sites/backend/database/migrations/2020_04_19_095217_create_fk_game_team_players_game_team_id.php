@@ -13,7 +13,7 @@ class CreateFkGameTeamPlayersGameTeamId extends Migration
      */
     public function up(): void
     {
-        Schema::table('game_team_players', function (Blueprint $table) {
+        Schema::table('game_team_players', function (Blueprint $table): void {
             $table->foreign('game_team_id')
                 ->references('id')
                 ->on('game_teams');
@@ -27,7 +27,7 @@ class CreateFkGameTeamPlayersGameTeamId extends Migration
      */
     public function down(): void
     {
-        Schema::table('game_team_players', function (Blueprint $table) {
+        Schema::table('game_team_players', function (Blueprint $table): void {
             $table->dropForeign('game_team_players_game_team_id_foreign');
         });
     }

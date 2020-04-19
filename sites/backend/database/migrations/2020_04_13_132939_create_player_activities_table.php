@@ -13,7 +13,7 @@ class CreatePlayerActivitiesTable extends Migration
      */
     public function up(): void
     {
-        Schema::create('player_activities', function (Blueprint $table) {
+        Schema::create('player_activities', function (Blueprint $table): void {
             $table->id();
             $table->unsignedBigInteger('player_id');
             $table->timestamp('login_date');

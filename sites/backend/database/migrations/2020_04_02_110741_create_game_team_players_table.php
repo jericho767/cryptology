@@ -13,7 +13,7 @@ class CreateGameTeamPlayersTable extends Migration
      */
     public function up(): void
     {
-        Schema::create('game_team_players', function (Blueprint $table) {
+        Schema::create('game_team_players', function (Blueprint $table): void {
             $table->unsignedBigInteger('id')->unique();
             $table->unsignedBigInteger('game_team_id');
             $table->unsignedBigInteger('player_id');

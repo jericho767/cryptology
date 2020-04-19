@@ -13,7 +13,7 @@ class CreateGameTurnsTable extends Migration
      */
     public function up(): void
     {
-        Schema::create('game_turns', function (Blueprint $table) {
+        Schema::create('game_turns', function (Blueprint $table): void {
             $table->id();
             $table->unsignedBigInteger('turn_order_id');
             $table->unsignedSmallInteger('guess_count');
