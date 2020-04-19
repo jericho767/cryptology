@@ -23,6 +23,6 @@ class GameTeamPlayer extends BaseModel
 
     public function turnOrder()
     {
-        // TODO Define
+        return $this->hasOne(TurnOrder::class, 'game_team_player_id', 'id');
     }
 }
