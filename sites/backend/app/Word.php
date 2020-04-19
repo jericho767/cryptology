@@ -18,6 +18,6 @@ class Word extends BaseModel
 
     public function gameMaps()
     {
-        // TODO Add relation
+        return $this->hasMany(GameMap::class, 'word_id', 'id');
     }
 }
