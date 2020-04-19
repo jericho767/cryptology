@@ -11,6 +11,11 @@ class GameTurn extends BaseModel
     public $incrementing = true;
     protected $fillable = ['turn_order_id', 'guess_count', 'clue'];
 
+    /**
+     * @var int Maximum acceptable character length of the clue attribute
+     */
+    const CLUE_MAX_LENGTH = 50;
+
     public function guesses()
     {
         return $this->hasMany(TurnGuess::class, 'game_turn_id', 'id');
