@@ -2,9 +2,9 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseModel;
 
-class PlayerActivity extends Model
+class PlayerActivity extends BaseModel
 {
     protected $table = 'player_activities';
     protected $primaryKey = 'id';
