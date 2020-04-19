@@ -36,7 +36,7 @@ class Player extends BaseModel
 
     public function activities()
     {
-        // TODO Add relation
+        return $this->hasMany(PlayerActivity::class, 'player_id', 'id');
     }
 
     public function gameMasterOfGames()
