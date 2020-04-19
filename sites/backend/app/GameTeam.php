@@ -38,6 +38,6 @@ class GameTeam extends BaseModel
 
     public function players()
     {
-        // TODO Add relation
+        return $this->hasMany(GameTeamPlayer::class, 'game_team_id', 'id');
     }
 }
