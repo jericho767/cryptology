@@ -11,7 +11,7 @@ class CreateFkGamesCreatedBy extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('games', function (Blueprint $table) {
             $table->foreign('created_by')
@@ -25,7 +25,7 @@ class CreateFkGamesCreatedBy extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::table('games', function (Blueprint $table) {
             $table->dropForeign('games_created_by_foreign');

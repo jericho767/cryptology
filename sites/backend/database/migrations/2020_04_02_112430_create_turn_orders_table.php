@@ -11,7 +11,7 @@ class CreateTurnOrdersTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('turn_orders', function (Blueprint $table) {
             $table->unsignedBigInteger('id', true)->unique();
@@ -27,7 +27,7 @@ class CreateTurnOrdersTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('turn_orders');
     }

@@ -11,7 +11,7 @@ class CreateFkGamesWinner extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('games', function (Blueprint $table) {
             $table->foreign('winner')
@@ -25,7 +25,7 @@ class CreateFkGamesWinner extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::table('games', function (Blueprint $table) {
             $table->dropForeign('games_winner_foreign');

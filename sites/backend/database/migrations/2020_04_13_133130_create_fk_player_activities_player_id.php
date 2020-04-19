@@ -11,7 +11,7 @@ class CreateFkPlayerActivitiesPlayerId extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('player_activities', function (Blueprint $table) {
             $table->foreign('player_id')
@@ -25,7 +25,7 @@ class CreateFkPlayerActivitiesPlayerId extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::table('player_activities', function (Blueprint $table) {
             $table->dropForeign('player_activities_player_id_foreign');

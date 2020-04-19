@@ -11,7 +11,7 @@ class AlterTurnGuessesIdToAi extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('turn_guesses', function (Blueprint $table) {
             $table->unsignedBigInteger('id', true)->change();
@@ -23,7 +23,7 @@ class AlterTurnGuessesIdToAi extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::table('turn_guesses', function (Blueprint $table) {
             $table->unsignedBigInteger('id', false)->change();

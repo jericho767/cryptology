@@ -11,7 +11,7 @@ class CreateFkGameMapsGameId extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('game_maps', function (Blueprint $table) {
             $table->foreign('game_id')
@@ -25,7 +25,7 @@ class CreateFkGameMapsGameId extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::table('game_maps', function (Blueprint $table) {
             $table->dropForeign('game_maps_game_id_foreign');

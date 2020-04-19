@@ -11,7 +11,7 @@ class CreateWordsTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('words', function (Blueprint $table) {
             $table->id();
@@ -26,7 +26,7 @@ class CreateWordsTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('words');
     }

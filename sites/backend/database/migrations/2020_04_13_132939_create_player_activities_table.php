@@ -11,7 +11,7 @@ class CreatePlayerActivitiesTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('player_activities', function (Blueprint $table) {
             $table->id();
@@ -28,7 +28,7 @@ class CreatePlayerActivitiesTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('player_activities');
     }
