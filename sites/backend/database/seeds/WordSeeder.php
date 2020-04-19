@@ -10,7 +10,7 @@ class WordSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         factory(Word::class, 100)->make()->each(function (Word $word) {
             // Check if the word already exists
