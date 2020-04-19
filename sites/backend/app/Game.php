@@ -36,7 +36,7 @@ class Game extends BaseModel
 
     public function participants()
     {
-        // TODO Add relation
+        return $this->hasMany(GameTeam::class, 'game_id', 'id');
     }
 
     public function creator()
