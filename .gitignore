@@ -1,0 +1,8 @@
+.env
+sites/backend/vendor
+
+# CS FIXER
+sites/backend/.php_cs.cache
+
+# IDE
+.idea/*

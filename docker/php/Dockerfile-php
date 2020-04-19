@@ -1,0 +1,14 @@
+FROM php:7.3-fpm
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
+RUN apt-get update
+RUN apt-get install -y git zlib1g-dev libzip-dev libpng-dev vim
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
+    && php composer-setup.php --install-dir=/usr/local/bin --filename=composer \
+    && php -r "unlink('composer-setup.php');"
+RUN docker-php-ext-install zip
+RUN docker-php-ext-install gd
+RUN docker-php-ext-install mysqli
+RUN docker-php-ext-install pdo_mysql
+RUN printf '[PHP]\ndate.timezone = "Asia/Tokyo"\n' > /usr/local/etc/php/conf.d/tzone.ini
+COPY ./docker/php/uploads.ini /usr/local/etc/php/conf.d/uploads.ini
