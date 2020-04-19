@@ -12,7 +12,7 @@ class PlayerSeeder extends Seeder
      */
     public function run(): void
     {
-        factory(Player::class, 80)->make()->each(function (Player $player) {
+        factory(Player::class, 80)->make()->each(function (Player $player): void {
             // Check if player with the same email address exists
             $hasExists = Player::query()
                 ->where('email', $player->getAttribute('email'))

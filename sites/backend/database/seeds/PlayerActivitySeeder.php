@@ -17,7 +17,7 @@ class PlayerActivitySeeder extends Seeder
         $players = Player::all()->shuffle();
 
         factory(PlayerActivity::class, 100)->make()->each(
-            function (PlayerActivity $activity) use ($players) {
+            function (PlayerActivity $activity) use ($players): void {
                 if ($activity->getAttribute('logout_date') !== null) {
                     /*
                      * It's an inactive activity
@@ -31,7 +31,7 @@ class PlayerActivitySeeder extends Seeder
                     $player = $players->random();
                 } else {
                     // It's an active activity, fetch all inactive players and make them active
-                    $inactivePlayers = Player::query()->whereHas('activities', function ($query) {
+                    $inactivePlayers = Player::query()->whereHas('activities', function ($query): void {
                         /* @var Builder $query */
                         $query->whereNull('logout_date');
                     }, '<', 1)->get()->shuffle();
