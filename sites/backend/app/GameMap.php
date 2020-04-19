@@ -41,6 +41,6 @@ class GameMap extends BaseModel
 
     public function blockOwner()
     {
-        // TODO Add relation
+        return $this->belongsTo(GameTeam::class, 'game_team_id', 'id');
     }
 }
