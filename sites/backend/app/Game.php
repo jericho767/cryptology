@@ -41,6 +41,6 @@ class Game extends BaseModel
 
     public function creator()
     {
-        // TODO Add relation
+        return $this->belongsTo(Player::class, 'created_by', 'id');
     }
 }
