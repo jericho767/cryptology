@@ -13,7 +13,7 @@ class GameTurn extends BaseModel
 
     public function guesses()
     {
-        // TODO Define
+        return $this->hasMany(TurnGuess::class, 'game_turn_id', 'id');
     }
 
     public function turnOrder()
