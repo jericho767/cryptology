@@ -10,8 +10,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class GameTeam extends BaseModel
 {
     protected $table = 'game_teams';
-    protected $primaryKey = 'id';
-    public $incrementing = true;
+    protected $primaryKey = ['game_id', 'game_master'];
+    public $incrementing = false;
     protected $fillable = ['game_id', 'team_name', 'game_master'];
 
     /**
