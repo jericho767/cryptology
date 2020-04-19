@@ -31,7 +31,7 @@ class Game extends BaseModel
 
     public function winner()
     {
-        // TODO Add relation
+        return $this->belongsTo(GameTeam::class, 'winner', 'id');
     }
 
     public function participants()
