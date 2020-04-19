@@ -31,7 +31,7 @@ class GameMap extends BaseModel
 
     public function guessAt()
     {
-        // TODO Add relation
+        return $this->hasOne(TurnGuess::class, 'game_map_id', 'id');
     }
 
     public function game()
