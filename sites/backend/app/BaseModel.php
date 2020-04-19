@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -96,7 +97,10 @@ class BaseModel extends Model
         $this->original = $this->attributes;
 
         // Touches all relations
-        if (array_get($options, 'touch', true)) $this->touchOwners();
+        if (array_get($options, 'touch', true)) {
+            $this->touchOwners();
+        }
+
         return true;
     }
 }
