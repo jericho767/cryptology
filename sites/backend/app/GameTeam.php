@@ -11,6 +11,11 @@ class GameTeam extends BaseModel
     public $incrementing = true;
     protected $fillable = ['game_id', 'team_name', 'game_master'];
 
+    /**
+     * @var int Maximum acceptable length of the `team_name`
+     */
+    const TEAM_NAME_MAX_LENGTH = 20;
+
     public function gameWon()
     {
         return $this->hasOne(Game::class, 'winner', 'id');
