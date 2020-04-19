@@ -13,7 +13,7 @@ class TurnOrder extends BaseModel
 
     public function turns()
     {
-        // TODO Define
+        return $this->hasMany(GameTurn::class, 'turn_order_id', 'id');
     }
 
     public function gameTeamPlayer()
