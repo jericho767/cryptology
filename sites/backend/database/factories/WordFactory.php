@@ -5,7 +5,7 @@ use Faker\Generator as Faker;
 use Illuminate\Database\Eloquent\Factory;
 
 /* @var Factory $factory */
-$factory->define(Word::class, function (Faker $faker) {
+$factory->define(Word::class, function (Faker $faker): array {
     $word = null;
     $gen = $faker->unique(true);
 

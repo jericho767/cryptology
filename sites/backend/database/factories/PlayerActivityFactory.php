@@ -6,7 +6,7 @@ use Faker\Generator as Faker;
 use Illuminate\Database\Eloquent\Factory;
 
 /* @var Factory $factory */
-$factory->define(PlayerActivity::class, function (Faker $faker) {
+$factory->define(PlayerActivity::class, function (Faker $faker): array {
     $isActive = collect([true, false, false])->random();
 
     if ($isActive) {

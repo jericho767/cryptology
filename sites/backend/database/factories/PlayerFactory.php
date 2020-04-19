@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factory;
 use Illuminate\Support\Facades\Hash;
 
 /* @var Factory $factory */
-$factory->define(Player::class, function (Faker $faker) {
+$factory->define(Player::class, function (Faker $faker): array {
     $phoneNumber = '09' . mt_rand(100000000, 999999999);
 
     return [
