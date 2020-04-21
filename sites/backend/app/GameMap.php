@@ -25,6 +25,22 @@ class GameMap extends BaseModel
      * @var int Number of words that will be added to be guessed by the first team to guess
      */
     const FIRST_TURN_ADD = 1;
+    /**
+     * @var int Number of assassin in the map
+     */
+    const NUM_OF_ASSASSIN = 1;
+    /**
+     * @var int `block_owner` constant indicating the blocks belongs to an assassin
+     */
+    const ASSASSIN_BLOCK_NUM = 0;
+    /**
+     * @var int `block_owner` constant indicating the blocks belongs to a civilian
+     */
+    const CIVILIAN_BLOCK_NUM = 1;
+    /**
+     * @var int `block_owner` constant indicating the blocks belongs to a team
+     */
+    const TEAM_BLOCK_NUM = 2;
 
     public function word(): BelongsTo
     {
