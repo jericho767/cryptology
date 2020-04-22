@@ -14,6 +14,8 @@ class GameMap extends BaseModel
     protected $fillable = ['game_id', 'word_id', 'block_number', 'block_owner', 'game_team_id'];
 
     /**
+     * Ideal to be a perfect square.
+     *
      * @var int Number of blocks in a game map
      */
     const MAP_SIZE = 25;

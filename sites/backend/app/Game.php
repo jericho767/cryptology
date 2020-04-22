@@ -18,6 +18,19 @@ class Game extends BaseModel
      */
     const NAME_MAX_LENGTH = 20;
     /**
+     * NOTE: This is not easily adjustable, changing this value
+     *       will entail a change in other parts as well, like:
+     *       MAP_SIZE, to accommodate the growing number of
+     *                 participating teams
+     *
+     *       AND the addition of blocks to be guessed must also
+     *           be adjusted in order for it to be a fair game.
+     *
+     *           Scenario: Set max teams to three(3)
+     *           First team needs to guess `n+1` (for +1, check GAME_MAP::FIRST_TURN_ADD)
+     *           Second team needs to guess `n`
+     *           Third team needs to guess `n` as well.(unjust with second team)
+     *
      * @var int Number of teams to be playing in a game
      */
     const MAX_NUMBER_OF_PLAYING_TEAMS = 2;
