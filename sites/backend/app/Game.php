@@ -22,9 +22,13 @@ class Game extends BaseModel
      */
     const MAX_NUMBER_OF_PLAYING_TEAMS = 2;
     /**
-     * @var int Minimum number of players per team in order to play
+     * @var int Minimum number of players per team in order to play (including game master)
      */
     const MIN_PLAYERS_PER_TEAM = 2;
+    /**
+     * @var int Maximum number of players per team that can play (including game master)
+     */
+    const MAX_PLAYERS_PER_TEAM = 6;
 
     public function mapBlocks(): HasMany
     {
