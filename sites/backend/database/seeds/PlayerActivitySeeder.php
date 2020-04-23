@@ -31,10 +31,15 @@ class PlayerActivitySeeder extends Seeder
                     $player = $players->random();
                 } else {
                     // It's an active activity, fetch all inactive players and make them active
-                    $inactivePlayers = Player::query()->whereHas('activities', function ($query): void {
-                        /* @var Builder $query */
-                        $query->whereNull('logout_date');
-                    }, '<', 1)->get()->shuffle();
+                    $inactivePlayers = Player::query()
+                        ->whereHas(
+                            'activities',
+                            function (Builder $query): void {
+                                $query->whereNull('logout_date');
+                            },
+                            '<',
+                            1
+                        )->get()->shuffle();
 
                     /* @var Player $player */
                     if ($inactivePlayers->count() > 0) {
