@@ -31,6 +31,14 @@ class Game extends BaseModel
      *           Second team needs to guess `n`
      *           Third team needs to guess `n` as well.(unjust with second team)
      *
+     *       AND the number of assassins must also be adjusted
+     *           to the number of participating teams
+     *************************************************
+     * At the time of development it was casted that the game
+     * WILL handle more than 2 teams. But it was just a plan,
+     * a fevered dream of a young man who's been dismissed as
+     * foolish and ambitious.
+     *
      * @var int Number of teams to be playing in a game
      */
     const MAX_NUMBER_OF_PLAYING_TEAMS = 2;
