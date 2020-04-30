@@ -49,7 +49,7 @@ class GameMap extends BaseModel
         return $this->belongsTo(Word::class, 'word_id', 'id');
     }
 
-    public function guessAt(): HasOne
+    public function guessedAt(): HasOne
     {
         return $this->hasOne(TurnGuess::class, 'game_map_id', 'id');
     }
