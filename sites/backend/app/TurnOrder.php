@@ -13,6 +13,15 @@ class TurnOrder extends BaseModel
     public $incrementing = false;
     protected $fillable = ['game_team_player_id', 'has_played'];
 
+    /**
+     * int Value of the column `has_played` for orders that are not played
+     */
+    const HAS_NOT_PLAYED = 0;
+    /**
+     * int Value of the column `has_played` for orders that been played
+     */
+    const HAS_PLAYED = 1;
+
     public function turns(): HasMany
     {
         return $this->hasMany(GameTurn::class, 'turn_order_id', 'id');
