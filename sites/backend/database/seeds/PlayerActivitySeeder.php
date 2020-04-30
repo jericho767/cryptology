@@ -2,7 +2,7 @@
 
 use App\Player;
 use App\PlayerActivity;
-use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Seeder;
 
 class PlayerActivitySeeder extends Seeder
