@@ -16,10 +16,6 @@ class Game extends BaseModel
      * @var int Maximum acceptable length of the name attribute
      */
     const NAME_MAX_LENGTH = 20;
-    /**
-     * @var int Maximum number of players per team that can play (including game master)
-     */
-    const MAX_PLAYERS_PER_TEAM = 6;
 
     public function mapBlocks(): HasMany
     {
