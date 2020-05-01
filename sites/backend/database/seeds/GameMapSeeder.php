@@ -1,6 +1,6 @@
 <?php
 
-use App\Game;
+use App\Models\Game;
 use App\GameMap;
 use App\Word;
 use Illuminate\Database\Seeder;

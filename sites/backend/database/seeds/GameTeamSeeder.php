@@ -1,6 +1,6 @@
 <?php
 
-use App\Game;
+use App\Models\Game;
 use App\GameTeam;
 use App\Player;
 use Illuminate\Database\Seeder;

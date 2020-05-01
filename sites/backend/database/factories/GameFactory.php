@@ -1,6 +1,6 @@
 <?php
 
-use App\Game;
+use App\Models\Game;
 use Illuminate\Database\Eloquent\Factory;
 
 /* @var Factory $factory */
