@@ -10,7 +10,7 @@ class GameSettingSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $gameSetting = new GameSetting([
             'map_size' => 25,
