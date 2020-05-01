@@ -40,7 +40,7 @@ class GameTeamPlayerSeeder extends Seeder
         $gameTeamsByGame = GameTeam::all()->groupBy('game_id');
         $players = Player::all();
         // -1 for the game master
-        $minGuessersPerTeam = $this->minPlayers;
+        $minGuessersPerTeam = $this->minPlayers - 1;
         // -1 for the game master
         $maxGuessersPerTeam = $this->maxPlayers - 1;
 
