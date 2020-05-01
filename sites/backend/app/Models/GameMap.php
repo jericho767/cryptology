@@ -13,14 +13,6 @@ class GameMap extends BaseModel
     protected $fillable = ['game_id', 'word_id', 'block_number', 'block_owner', 'game_team_id'];
 
     /**
-     * @var int Number of words that will be added to be guessed by the first team to guess
-     */
-    const FIRST_TURN_ADD = 1;
-    /**
-     * @var int Number of assassin in the map
-     */
-    const NUM_OF_ASSASSIN = 1;
-    /**
      * @var int `block_owner` constant indicating the blocks belongs to an assassin
      */
     const ASSASSIN_BLOCK_NUM = 0;
