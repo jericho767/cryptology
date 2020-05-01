@@ -15,7 +15,7 @@ class GameSettingSeeder extends Seeder
         $gameSetting = new GameSetting([
             'map_size' => 25,
             'guess_count' => 8,
-            'max_teams' => 5,
+            'max_teams' => 2,
             'min_players' => 2,
             'max_players' => 6,
         ]);
