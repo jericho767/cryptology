@@ -2,7 +2,7 @@
 
 use App\Models\GameTeam;
 use App\Models\GameTeamPlayer;
-use App\TurnOrder;
+use App\Models\TurnOrder;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
 
