@@ -3,11 +3,26 @@
 use App\Models\Game;
 use App\Models\GameMap;
 use App\Models\Word;
+use App\Services\GameSettingService;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
 
 class GameMapSeeder extends Seeder
 {
+    private $gameSettings;
+    /**
+     * Current setting for the size of the map
+     *
+     * @var int
+     */
+    private $mapSize;
+
+    public function __construct(GameSettingService $gameSettings)
+    {
+        $this->gameSettings = $gameSettings;
+        $this->mapSize = $this->gameSettings->getMapSize();
+    }
+
     /**
      * Run the database seeds.
      *
@@ -26,10 +41,10 @@ class GameMapSeeder extends Seeder
             $map = collect([]);
 
             // Randomly fetch words for the blocks from the poll
-            $mapWords = $words->random(GameMap::MAP_SIZE)->shuffle();
+            $mapWords = $words->random($this->mapSize)->shuffle();
 
             // Initialize all blocks model
-            for ($mapNum = 1; $mapNum <= GameMap::MAP_SIZE; $mapNum++) {
+            for ($mapNum = 1; $mapNum <= $this->mapSize; $mapNum++) {
                 // Add block to the blocks list
                 $map->put(
                     $mapNum,
