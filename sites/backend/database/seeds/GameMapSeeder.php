@@ -2,7 +2,7 @@
 
 use App\Models\Game;
 use App\Models\GameMap;
-use App\Word;
+use App\Models\Word;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
 

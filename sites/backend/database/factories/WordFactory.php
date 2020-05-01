@@ -1,6 +1,6 @@
 <?php
 
-use App\Word;
+use App\Models\Word;
 use Faker\Generator as Faker;
 use Illuminate\Database\Eloquent\Factory;
 

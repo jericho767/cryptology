@@ -1,6 +1,6 @@
 <?php
 
-use App\Word;
+use App\Models\Word;
 use Illuminate\Database\Seeder;
 
 class WordSeeder extends Seeder
