@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Game;
 use App\Models\GameTeam;
 use App\Models\GameTeamPlayer;
 use App\Models\Player;
@@ -17,11 +16,18 @@ class GameTeamPlayerSeeder extends Seeder
      * @var int
      */
     private $minPlayers;
+    /**
+     * The maximum number of players in a team in order to participate
+     *
+     * @var int
+     */
+    private $maxPlayers;
 
     public function __construct(GameSettingService $gameSettingService)
     {
         $this->gameSettingService = $gameSettingService;
         $this->minPlayers = $this->gameSettingService->getMinPlayers();
+        $this->maxPlayers = $this->gameSettingService->getMaxPlayers();
     }
 
     /**
@@ -36,7 +42,7 @@ class GameTeamPlayerSeeder extends Seeder
         // -1 for the game master
         $minGuessersPerTeam = $this->minPlayers;
         // -1 for the game master
-        $maxGuessersPerTeam = Game::MAX_PLAYERS_PER_TEAM - 1;
+        $maxGuessersPerTeam = $this->maxPlayers - 1;
 
         foreach ($gameTeamsByGame as $gameId => $gameTeams) {
             /** @var Collection $gameTeams */

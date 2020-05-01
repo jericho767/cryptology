@@ -32,7 +32,7 @@ class GameSettingService extends BaseService
     }
 
     /**
-     * Gets the current guess count setting
+     * Gets the current setting for guess count
      *
      * @return int
      */
@@ -42,7 +42,7 @@ class GameSettingService extends BaseService
     }
 
     /**
-     * Gets the maximum number of teams that can participate in a game
+     * Gets the current setting for maximum number of teams that can participate in a game
      *
      * @return int
      */
@@ -52,12 +52,22 @@ class GameSettingService extends BaseService
     }
 
     /**
-     * Gets the minimum number of players in a team in order to participate
+     * Gets the current setting for minimum number of players in a team in order to participate
      *
      * @return int
      */
     public function getMinPlayers(): int
     {
         return $this->currentGameSetting->getAttribute('min_players');
+    }
+
+    /**
+     * Gets the current setting for maximum number of players in a team in order to participate
+     *
+     * @return int
+     */
+    public function getMaxPlayers(): int
+    {
+        return $this->currentGameSetting->getAttribute('max_players');
     }
 }
