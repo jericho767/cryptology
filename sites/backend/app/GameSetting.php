@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Models\BaseModel;
+use Mockery\Exception;
 
 class GameSetting extends BaseModel
 {
@@ -20,9 +21,11 @@ class GameSetting extends BaseModel
     /**
      * Validates the model.
      *
-     * @return string|null
+     * @return bool
+     *
+     * @throws Exception
      */
-    protected function validate(): ?string
+    protected function validate(): bool
     {
         $mapSize = $this->getAttribute('map_size');
         $guessCount = $this->getAttribute('guess_count');
@@ -31,17 +34,17 @@ class GameSetting extends BaseModel
         $maxPlayers = $this->getAttribute('max_players');
 
         if ($guessCount < 1) {
-            return 'Guess count cannot be zero.';
+            throw new Exception('Guess count cannot be zero.');
         }
 
         // 2 is the least number of teams to operate a game
         if ($maxTeams < 2) {
-            return 'Team count must be at least 2.';
+            throw new Exception('Team count must be at least 2.');
         }
 
         // 2 is the least number of players for a team to play (1 for guesser, 1 for game master)
         if ($minPlayers < 2 || $maxPlayers < 2) {
-            return 'Player count needs to be at least 2.';
+            throw new Exception('Player count needs to be at least 2.');
         }
 
         $roleBlocks = 0;
@@ -56,22 +59,21 @@ class GameSetting extends BaseModel
         $roleBlocks += $guessCount * $maxTeams + $assassinsCount;
 
         if ($mapSize <= $roleBlocks) {
-            return 'Cannot fix number of role blocks in the map.';
+            throw new Exception('Cannot fit number of role blocks in the map.');
         }
 
-        return null;
+        return true;
     }
 
     public static function boot(): void
     {
         parent::boot();
 
-        self::creating(function(GameSetting $model): bool {
-            return $model->validate() === null;
-        });
+        $callback = function(GameSetting $model): void {
+            $model->validate();
+        };
 
-        self::updating(function(GameSetting $model): bool {
-            return $model->validate() === null;
-        });
+        self::creating($callback);
+        self::updating($callback);
     }
 }
