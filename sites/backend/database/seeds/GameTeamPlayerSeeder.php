@@ -2,7 +2,7 @@
 
 use App\Models\Game;
 use App\Models\GameTeam;
-use App\GameTeamPlayer;
+use App\Models\GameTeamPlayer;
 use App\Player;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;

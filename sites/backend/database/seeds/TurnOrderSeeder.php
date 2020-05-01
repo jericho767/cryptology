@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\GameTeam;
-use App\GameTeamPlayer;
+use App\Models\GameTeamPlayer;
 use App\TurnOrder;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
