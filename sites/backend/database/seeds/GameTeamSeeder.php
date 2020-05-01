@@ -2,7 +2,7 @@
 
 use App\Models\Game;
 use App\Models\GameTeam;
-use App\Player;
+use App\Models\Player;
 use Illuminate\Database\Seeder;
 
 class GameTeamSeeder extends Seeder

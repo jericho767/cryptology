@@ -1,6 +1,6 @@
 <?php
 
-use App\Player;
+use App\Models\Player;
 use Illuminate\Database\Seeder;
 
 class PlayerSeeder extends Seeder

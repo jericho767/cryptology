@@ -1,6 +1,6 @@
 <?php
 
-use App\Player;
+use App\Models\Player;
 use App\PlayerActivity;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Seeder;

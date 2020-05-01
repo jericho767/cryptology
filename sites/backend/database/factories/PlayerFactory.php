@@ -1,6 +1,6 @@
 <?php
 
-use App\Player;
+use App\Models\Player;
 use Faker\Generator as Faker;
 use Illuminate\Database\Eloquent\Factory;
 use Illuminate\Support\Facades\Hash;
