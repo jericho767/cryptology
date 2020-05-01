@@ -21,6 +21,7 @@ class CreateGameSettingsTable extends Migration
             $table->smallInteger('min_players');
             $table->smallInteger('max_players');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
