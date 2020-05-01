@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\Game;
-use App\GameMap;
+use App\Models\GameMap;
 use App\Word;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
