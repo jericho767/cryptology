@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\Player;
-use App\PlayerActivity;
+use App\Models\PlayerActivity;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Seeder;
 

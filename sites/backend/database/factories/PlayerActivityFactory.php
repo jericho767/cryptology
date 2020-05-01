@@ -1,6 +1,6 @@
 <?php
 
-use App\PlayerActivity;
+use App\Models\PlayerActivity;
 use Carbon\Carbon;
 use Faker\Generator as Faker;
 use Illuminate\Database\Eloquent\Factory;
