@@ -22,12 +22,22 @@ class GameSettingService extends BaseService
     }
 
     /**
-     * Gets the current map size settings
+     * Gets the current map size setting
      *
      * @return int
      */
     public function getMapSize(): int
     {
         return $this->currentGameSetting->getAttribute('map_size');
+    }
+
+    /**
+     * Gets the current guess count setting
+     *
+     * @return int
+     */
+    public function getGuessCount(): int
+    {
+        return $this->currentGameSetting->getAttribute('guess_count');
     }
 }

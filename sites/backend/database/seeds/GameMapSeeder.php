@@ -16,11 +16,18 @@ class GameMapSeeder extends Seeder
      * @var int
      */
     private $mapSize;
+    /**
+     * Current setting for the count of guesses
+     *
+     * @var int
+     */
+    private $guessSize;
 
     public function __construct(GameSettingService $gameSettings)
     {
         $this->gameSettings = $gameSettings;
         $this->mapSize = $this->gameSettings->getMapSize();
+        $this->guessSize = $this->gameSettings->getGuessCount();
     }
 
     /**
@@ -70,12 +77,12 @@ class GameMapSeeder extends Seeder
             foreach ($teamIds as $i => $teamId) {
                 if ($i === 0) {
                     // Make this team as the first team to make a guess
-                    for ($i = 0; $i < GameMap::GUESS_SIZE + GameMap::FIRST_TURN_ADD; $i++) {
+                    for ($i = 0; $i < $this->guessSize + GameMap::FIRST_TURN_ADD; $i++) {
                         $teamIdForMap->push($teamId);
                     }
                 } else {
                     // Succeeding teams
-                    for ($i = 0; $i < GameMap::GUESS_SIZE; $i++) {
+                    for ($i = 0; $i < $this->guessSize; $i++) {
                         $teamIdForMap->push($teamId);
                     }
                 }

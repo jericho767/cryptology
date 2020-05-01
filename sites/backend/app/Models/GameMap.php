@@ -13,10 +13,6 @@ class GameMap extends BaseModel
     protected $fillable = ['game_id', 'word_id', 'block_number', 'block_owner', 'game_team_id'];
 
     /**
-     * @var int Number of blocks that will be guessed. First team to guess will have additional guess(es).
-     */
-    const GUESS_SIZE = 8;
-    /**
      * @var int Number of words that will be added to be guessed by the first team to guess
      */
     const FIRST_TURN_ADD = 1;
