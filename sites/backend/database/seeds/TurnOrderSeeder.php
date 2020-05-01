@@ -1,6 +1,6 @@
 <?php
 
-use App\GameTeam;
+use App\Models\GameTeam;
 use App\GameTeamPlayer;
 use App\TurnOrder;
 use Illuminate\Database\Seeder;

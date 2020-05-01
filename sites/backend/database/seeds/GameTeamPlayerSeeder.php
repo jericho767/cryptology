@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\Game;
-use App\GameTeam;
+use App\Models\GameTeam;
 use App\GameTeamPlayer;
 use App\Player;
 use Illuminate\Database\Seeder;

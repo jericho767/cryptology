@@ -1,6 +1,6 @@
 <?php
 
-use App\GameTeam;
+use App\Models\GameTeam;
 use Faker\Generator as Faker;
 use Illuminate\Database\Eloquent\Factory;
 
