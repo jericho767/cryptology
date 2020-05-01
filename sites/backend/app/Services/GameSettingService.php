@@ -50,4 +50,14 @@ class GameSettingService extends BaseService
     {
         return $this->currentGameSetting->getAttribute('max_teams');
     }
+
+    /**
+     * Gets the minimum number of players in a team in order to participate
+     *
+     * @return int
+     */
+    public function getMinPlayers(): int
+    {
+        return $this->currentGameSetting->getAttribute('min_players');
+    }
 }

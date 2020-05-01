@@ -4,11 +4,26 @@ use App\Models\Game;
 use App\Models\GameTeam;
 use App\Models\GameTeamPlayer;
 use App\Models\Player;
+use App\Services\GameSettingService;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
 
 class GameTeamPlayerSeeder extends Seeder
 {
+    private $gameSettingService;
+    /**
+     * The minimum number of players in a team in order to participate
+     *
+     * @var int
+     */
+    private $minPlayers;
+
+    public function __construct(GameSettingService $gameSettingService)
+    {
+        $this->gameSettingService = $gameSettingService;
+        $this->minPlayers = $this->gameSettingService->getMinPlayers();
+    }
+
     /**
      * Run the database seeds.
      *
@@ -19,7 +34,7 @@ class GameTeamPlayerSeeder extends Seeder
         $gameTeamsByGame = GameTeam::all()->groupBy('game_id');
         $players = Player::all();
         // -1 for the game master
-        $minGuessersPerTeam = Game::MIN_PLAYERS_PER_TEAM - 1;
+        $minGuessersPerTeam = $this->minPlayers;
         // -1 for the game master
         $maxGuessersPerTeam = Game::MAX_PLAYERS_PER_TEAM - 1;
 
