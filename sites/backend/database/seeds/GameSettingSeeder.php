@@ -1,6 +1,6 @@
 <?php
 
-use App\GameSetting;
+use App\Models\GameSetting;
 use Illuminate\Database\Seeder;
 
 class GameSettingSeeder extends Seeder
