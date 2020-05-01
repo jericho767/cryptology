@@ -47,17 +47,33 @@ class GameSetting extends BaseModel
             throw new Exception('Player count needs to be at least 2.');
         }
 
+        // Validate integrity between min and max players
+        if ($minPlayers > $maxPlayers) {
+            throw new Exception('Min and max players values are crazy.');
+        }
+
+        // Blocks that have roles(assassin or for a team)
         $roleBlocks = 0;
+
         // Additional blocks for each team
         for ($i = 0; $i < $maxTeams; $i++) {
-            // $i - count of blocks for additional guess for each team
+            /*
+             * $i - count of blocks for additional guess for each team
+             * 0 - added for the 1st team
+             * 1 - for the 2nd
+             * 2 - for the 3rd
+             * and so forth
+             */
             $roleBlocks += $i;
         }
 
         // Number of assassins
         $assassinsCount = $maxTeams - 1;
+
+        // Total role blocks
         $roleBlocks += $guessCount * $maxTeams + $assassinsCount;
 
+        // Map size cannot be less than or equal, there'll be no more room for non-role block(civilians)
         if ($mapSize <= $roleBlocks) {
             throw new Exception('Cannot fit number of role blocks in the map.');
         }
