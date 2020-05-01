@@ -3,10 +3,25 @@
 use App\Models\Game;
 use App\Models\GameTeam;
 use App\Models\Player;
+use App\Services\GameSettingService;
 use Illuminate\Database\Seeder;
 
 class GameTeamSeeder extends Seeder
 {
+    private $gameSettingService;
+    /**
+     * Maximum number of teams that can participate in a game
+     *
+     * @var int
+     */
+    private $maxTeams;
+
+    public function __construct(GameSettingService $gameSettingService)
+    {
+        $this->gameSettingService = $gameSettingService;
+        $this->maxTeams = $this->gameSettingService->getMaxTeams();
+    }
+
     /**
      * Run the database seeds.
      *
@@ -19,7 +34,7 @@ class GameTeamSeeder extends Seeder
 
         $games->each(function (Game $game) use ($playerIds): void {
             // Random number of participating teams in the game
-            $numOfTeams = rand(2, Game::MAX_NUMBER_OF_PLAYING_TEAMS);
+            $numOfTeams = rand(2, $this->maxTeams);
             // Get game masters for the teams
             $gameMasters = $playerIds->random($numOfTeams);
 

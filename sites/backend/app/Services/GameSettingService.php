@@ -40,4 +40,14 @@ class GameSettingService extends BaseService
     {
         return $this->currentGameSetting->getAttribute('guess_count');
     }
+
+    /**
+     * Gets the maximum number of teams that can participate in a game
+     *
+     * @return int
+     */
+    public function getMaxTeams(): int
+    {
+        return $this->currentGameSetting->getAttribute('max_teams');
+    }
 }
