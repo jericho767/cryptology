@@ -20,6 +20,10 @@ class TurnOrder extends BaseModel
      * int Value of the column `has_played` for orders that been played
      */
     const HAS_PLAYED = 1;
+    /**
+     * int Value of the column `has_played` for orders that are cannot play anymore (assassin has been guessed)
+     */
+    const CANNOT_PLAY_ANYMORE = 2;
 
     public function turns(): HasMany
     {
