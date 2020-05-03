@@ -28,13 +28,12 @@ class TurnOrderSeeder extends Seeder
                 return $gameTeam->getRelation('gameBlocks')->count();
             })->values()->each(function (GameTeam $gameTeam): void {
                 /*
-                 * Fetch game team players, sort them by ID.
-                 * `game_team_players`.`id` will be the basis for the turn of each player
+                 * Fetch game team players for creation of the `turn_orders`
                  */
                 $gameTeam
-                    ->getRelation('players')
-                    ->sortBy('id')
-                    ->values()
+                    ->getRelation('players') // Get the players
+                    ->shuffle() // Shuffle them
+                    ->values() // Reset the indices
                     ->each(function (GameTeamPlayer $gameTeamPlayer): void {
                         // Add game team player to the turn sequence order
                         $turnOrder = new TurnOrder([
