@@ -8,6 +8,9 @@ use App\Services\GameSettingService;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
 
+/**
+ * Class GameMapSeeder
+ */
 class GameMapSeeder extends Seeder
 {
     private $gameSettingsService;
@@ -25,6 +28,11 @@ class GameMapSeeder extends Seeder
      */
     private $guessSize;
 
+    /**
+     * GameMapSeeder constructor.
+     * @param GameSettingService $gameSettings
+     * @param GameService $gameService
+     */
     public function __construct(GameSettingService $gameSettings, GameService $gameService)
     {
         $this->gameSettingsService = $gameSettings;

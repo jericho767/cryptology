@@ -4,6 +4,9 @@ use App\Models\Game;
 use App\Models\Player;
 use Illuminate\Database\Seeder;
 
+/**
+ * Class GameSeeder
+ */
 class GameSeeder extends Seeder
 {
     /**

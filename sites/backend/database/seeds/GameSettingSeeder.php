@@ -3,6 +3,9 @@
 use App\Models\GameSetting;
 use Illuminate\Database\Seeder;
 
+/**
+ * Class GameSettingSeeder
+ */
 class GameSettingSeeder extends Seeder
 {
     /**

@@ -6,6 +6,9 @@ use App\Models\TurnOrder;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
 
+/**
+ * Class TurnOrderSeeder
+ */
 class TurnOrderSeeder extends Seeder
 {
     /**

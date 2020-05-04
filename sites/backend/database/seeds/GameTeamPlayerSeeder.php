@@ -7,6 +7,9 @@ use App\Services\GameSettingService;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
 
+/**
+ * Class GameTeamPlayerSeeder
+ */
 class GameTeamPlayerSeeder extends Seeder
 {
     private $gameSettingService;
@@ -23,6 +26,10 @@ class GameTeamPlayerSeeder extends Seeder
      */
     private $maxPlayers;
 
+    /**
+     * GameTeamPlayerSeeder constructor.
+     * @param GameSettingService $gameSettingService
+     */
     public function __construct(GameSettingService $gameSettingService)
     {
         $this->gameSettingService = $gameSettingService;

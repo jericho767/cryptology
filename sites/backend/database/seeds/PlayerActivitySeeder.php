@@ -5,6 +5,9 @@ use App\Models\PlayerActivity;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Seeder;
 
+/**
+ * Class PlayerActivitySeeder
+ */
 class PlayerActivitySeeder extends Seeder
 {
     /**

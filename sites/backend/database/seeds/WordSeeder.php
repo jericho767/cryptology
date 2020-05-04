@@ -3,6 +3,9 @@
 use App\Models\Word;
 use Illuminate\Database\Seeder;
 
+/**
+ * Class WordSeeder
+ */
 class WordSeeder extends Seeder
 {
     /**
