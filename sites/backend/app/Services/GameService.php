@@ -5,6 +5,10 @@ namespace App\Services;
 use App\Models\Game;
 use Illuminate\Database\Eloquent\Builder;
 
+/**
+ * Class GameService
+ * @package App\Services
+ */
 class GameService extends BaseService
 {
     public function __construct()

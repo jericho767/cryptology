@@ -5,10 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * Class BaseModel
+ * @package App\Models
+ */
 class BaseModel extends Model
 {
     use SoftDeletes;
 
+    /**
+     * Save the model to the database.
+     *
+     * @param  array  $options
+     * @return bool
+     */
     public function save(array $options = []): bool
     {
         if (!is_array($this->getKeyName())) {

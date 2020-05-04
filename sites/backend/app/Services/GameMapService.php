@@ -5,6 +5,10 @@ namespace App\Services;
 use App\Models\GameMap;
 use Illuminate\Support\Collection;
 
+/**
+ * Class GameMapService
+ * @package App\Services
+ */
 class GameMapService extends BaseService
 {
     public function __construct()

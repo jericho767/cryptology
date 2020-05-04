@@ -4,6 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * Class Word
+ * @package App\Models
+ */
 class Word extends BaseModel
 {
     protected $table = 'words';
@@ -16,6 +20,11 @@ class Word extends BaseModel
      */
     const WORD_MAX_LENGTH = 25;
 
+    /**
+     * RELATION for `GameMap` model
+     *
+     * @return HasMany
+     */
     public function gameMaps(): HasMany
     {
         return $this->hasMany(GameMap::class, 'word_id', 'id');

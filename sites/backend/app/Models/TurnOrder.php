@@ -5,6 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * Class TurnOrder
+ * @package App\Models
+ */
 class TurnOrder extends BaseModel
 {
     protected $table = 'turn_orders';
@@ -25,11 +29,21 @@ class TurnOrder extends BaseModel
      */
     const CANNOT_PLAY_ANYMORE = 2;
 
+    /**
+     * RELATION for `GameTurn` model
+     *
+     * @return HasMany
+     */
     public function turns(): HasMany
     {
         return $this->hasMany(GameTurn::class, 'turn_order_id', 'id');
     }
 
+    /**
+     * RELATION for `GameTeamPlayer` model
+     *
+     * @return BelongsTo
+     */
     public function gameTeamPlayer(): BelongsTo
     {
         return $this->belongsTo(GameTeamPlayer::class, 'game_team_player_id', 'id');

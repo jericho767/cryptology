@@ -4,6 +4,10 @@ namespace App\Models;
 
 use Mockery\Exception;
 
+/**
+ * Class GameSetting
+ * @package App\Models
+ */
 class GameSetting extends BaseModel
 {
     protected $table = 'game_settings';

@@ -4,6 +4,10 @@ namespace App\Services;
 
 use App\Models\GameSetting;
 
+/**
+ * Class GameSettingService
+ * @package App\Services
+ */
 class GameSettingService extends BaseService
 {
     /**

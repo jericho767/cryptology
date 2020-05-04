@@ -4,6 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * Class Player
+ * @package App\Models
+ */
 class Player extends BaseModel
 {
     protected $table = 'players';
@@ -24,21 +28,41 @@ class Player extends BaseModel
      */
     const PHONE_NUMBER_MAX_LENGTH = 11;
 
+    /**
+     * RELATION for `Game` model
+     *
+     * @return HasMany
+     */
     public function gamesCreated(): HasMany
     {
         return $this->hasMany(Game::class, 'created_by', 'id');
     }
 
+    /**
+     * RELATION for `GameTeamPlayer` model
+     *
+     * @return HasMany
+     */
     public function teams(): HasMany
     {
         return $this->hasMany(GameTeamPlayer::class, 'player_id', 'id');
     }
 
+    /**
+     * RELATION for `PlayerActivity` model
+     *
+     * @return HasMany
+     */
     public function activities(): HasMany
     {
         return $this->hasMany(PlayerActivity::class, 'player_id', 'id');
     }
 
+    /**
+     * RELATION for `GameTeam` model
+     *
+     * @return HasMany
+     */
     public function gameMasterOfGames(): HasMany
     {
         return $this->hasMany(GameTeam::class, 'game_master', 'id');
