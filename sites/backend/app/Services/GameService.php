@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\Game;
-use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Class GameService
@@ -30,16 +29,12 @@ class GameService extends BaseService
     /**
      * Check if the game is still running given a `game_teams.id` value
      *
-     * @param int $gameTeamId
+     * @param int $gameId
      * @return bool
      */
-    public function isGameRunningByTeamId(int $gameTeamId): bool
+    public function isGameRunning(int $gameId): bool
     {
-        $game = Game::query()
-            ->whereHas('participants', function (Builder $builder) use ($gameTeamId): void {
-                $builder->where('id', $gameTeamId);
-            })
-            ->firstOrFail();
+        $game = Game::query()->where('id', $gameId)->firstOrFail();
 
         // Game is still running when the winner value is still `null`
         return $game->getAttribute('winner') === null;

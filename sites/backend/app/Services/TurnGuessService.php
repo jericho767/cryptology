@@ -36,7 +36,7 @@ class TurnGuessService extends BaseService
      */
     public function guessedAnAssassin(int $gameTeamId, int $gameId): ?TurnOrder
     {
-        if (!$this->gameService->isGameRunningByTeamId($gameTeamId)) {
+        if (!$this->gameService->isGameRunning($gameId)) {
             // Game is not running, what the fuck?
             throw new Exception('Game is not running.');
         }
