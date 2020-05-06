@@ -54,7 +54,7 @@ class TurnGuessService extends BaseService
      * @return TurnOrder|null
      * @throws Exception
      */
-    public function guessedAnAssassin(int $gameTeamId, int $gameId): ?TurnOrder
+    public function guessedAnAssassinBlock(int $gameTeamId, int $gameId): ?TurnOrder
     {
         $this->validateBeforeGuess($gameTeamId, $gameId);
 
@@ -73,7 +73,7 @@ class TurnGuessService extends BaseService
      * @return TurnOrder|null
      * @throws Exception
      */
-    public function guessedACivilian(int $gameTeamId, int $gameId): ?TurnOrder
+    public function guessedACivilianBlock(int $gameTeamId, int $gameId): ?TurnOrder
     {
         $this->validateBeforeGuess($gameTeamId, $gameId);
 
