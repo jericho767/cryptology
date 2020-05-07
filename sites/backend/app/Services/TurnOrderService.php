@@ -139,6 +139,13 @@ class TurnOrderService extends BaseService
             case GameMap::TEAM_BLOCK_NUM:
                 // Team block owner
                 if ($lastBlockGuessed->getAttribute('game_team_id') === $lastMovedTeamId) {
+                    // Get the guess count
+                    $guessCount = $lastGameTurn->getAttribute('guess_count');
+                    if ($guessCount < $lastGameTurn->getRelation('guesses')->count()) {
+                        // The same player can still play, it is still his/her turn
+                        return $latestTurnOrder;
+                    }
+
                     // The guess is from the same team, continue the turn of the team
                     return $this->getTurnFromTeamTurnOrders($turnOrdersByTeam, $lastMovedTeamId, $gameId);
                 } else {
@@ -228,7 +235,7 @@ class TurnOrderService extends BaseService
             }
         };
 
-        $turnOrders = TurnOrder::query()
+        $turnOrders = TurnOrder::with('gameTeamPlayer')
             ->whereHas('gameTeamPlayer.gameTeam', $callback)
             ->where('has_played', '!=', TurnOrder::CANNOT_PLAY_ANYMORE)
             ->orderBy('id')
