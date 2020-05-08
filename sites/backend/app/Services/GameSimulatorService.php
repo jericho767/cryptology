@@ -16,8 +16,17 @@ use Faker\Generator as Faker;
  */
 class GameSimulatorService extends BaseService
 {
+    /**
+     * @var int $gameId
+     */
     private $gameId;
+    /**
+     * @var Game $game
+     */
     private $game;
+    /**
+     * @var bool $isGameDone
+     */
     private $isGameDone;
 
     private $turnOrders;
