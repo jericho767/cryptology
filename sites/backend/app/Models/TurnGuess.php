@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class TurnGuess extends BaseModel
 {
     protected $table = 'turn_guesses';
-    protected $primaryKey = ['game_turn_id', 'game_map_id'];
+    protected $primaryKey = 'id';
     public $incrementing = false;
     protected $fillable = ['game_turn_id', 'game_map_id'];
 
