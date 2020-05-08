@@ -42,8 +42,7 @@ return [
 
         'api' => [
             'driver' => 'passport',
-            'provider' => 'players',
-            'hash' => false,
+            'provider' => 'users',
         ],
     ],
 
