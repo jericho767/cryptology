@@ -17,12 +17,11 @@ class CreateTurnGuessesTable extends Migration
     public function up(): void
     {
         Schema::create('turn_guesses', function (Blueprint $table): void {
-            $table->unsignedBigInteger('id')->unique();
+            $table->id();
             $table->unsignedBigInteger('game_turn_id');
-            $table->unsignedBigInteger('game_map_id');
+            $table->unsignedBigInteger('game_map_id')->unique();
             $table->timestamps();
             $table->softDeletes();
-            $table->primary(['game_turn_id', 'game_map_id']);
         });
     }
 
