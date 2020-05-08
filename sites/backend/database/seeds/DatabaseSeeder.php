@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call(GameSettingSeeder::class);
         $this->call(WordSeeder::class);
         $this->call(PlayerSeeder::class);
         $this->call(PlayerActivitySeeder::class);
@@ -22,6 +23,5 @@ class DatabaseSeeder extends Seeder
         $this->call(GameMapSeeder::class);
         $this->call(GameTeamPlayerSeeder::class);
         $this->call(TurnOrderSeeder::class);
-        $this->call(GameSettingSeeder::class);
     }
 }
