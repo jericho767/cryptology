@@ -2,14 +2,20 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 
 /**
  * Class Player
  * @package App\Models
  */
-class Player extends BaseModel
+class Player extends Authenticatable implements MustVerifyEmail
 {
+    use HasApiTokens, Notifiable;
+
     protected $table = 'players';
     protected $primaryKey = 'id';
     public $incrementing = true;
