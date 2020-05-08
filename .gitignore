@@ -1,5 +1,7 @@
 .env
 sites/backend/vendor
+sites/backend/storage/oauth-public.key
+sites/backend/storage/oauth-private.key
 
 # CS FIXER
 sites/backend/.php_cs.cache
