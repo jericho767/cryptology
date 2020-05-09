@@ -20,6 +20,7 @@ class Player extends Authenticatable implements MustVerifyEmail
     protected $primaryKey = 'id';
     public $incrementing = true;
     protected $fillable = ['name', 'email', 'phone_number', 'password'];
+    protected $hidden = ['password'];
 
     /**
      * @var int Maximum acceptable length of the name attribute
