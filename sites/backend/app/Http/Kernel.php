@@ -6,6 +6,7 @@ use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\CheckForMaintenanceMode;
 use App\Http\Middleware\CheckGameExists;
 use App\Http\Middleware\CheckGameIsRunning;
+use App\Http\Middleware\CheckGameTeamIntegrity;
 use App\Http\Middleware\CheckRequestForJson;
 use App\Http\Middleware\EncryptCookies;
 use App\Http\Middleware\RedirectIfAuthenticated;
@@ -97,5 +98,6 @@ class Kernel extends HttpKernel
         'accept.json' => CheckRequestForJson::class,
         'game.running' => CheckGameIsRunning::class,
         'game.exists' => CheckGameExists::class,
+        'game.team.integrity' => CheckGameTeamIntegrity::class,
     ];
 }
