@@ -30,6 +30,20 @@ class GameService extends BaseService
     }
 
     /**
+     * Gets the game
+     *
+     * @param int $gameId
+     * @return Game|null
+     */
+    public function getGame(int $gameId): ?Game
+    {
+        /** @var Game $game */
+        $game = Game::query()->find($gameId);
+
+        return $game;
+    }
+
+    /**
      * Checks if the game is running
      *
      * @param int $gameId
