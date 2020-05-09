@@ -33,12 +33,19 @@ class GameService extends BaseService
      * Gets the game
      *
      * @param int $gameId
+     * @param array $relations
      * @return Game|null
      */
-    public function getGame(int $gameId): ?Game
+    public function getGame(int $gameId, array $relations = []): ?Game
     {
         /** @var Game $game */
-        $game = Game::query()->find($gameId);
+        if ($relations !== '') {
+            $game = Game::with($relations);
+        } else {
+            $game = Game::query();
+        }
+
+        $game = $game->find($gameId);
 
         return $game;
     }
