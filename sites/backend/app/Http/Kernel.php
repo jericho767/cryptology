@@ -69,6 +69,11 @@ class Kernel extends HttpKernel
             'throttle:60,1',
             SubstituteBindings::class,
         ],
+
+        'playGame' => [
+            CheckGameExists::class,
+            CheckGameIsRunning::class,
+        ],
     ];
 
     /**
