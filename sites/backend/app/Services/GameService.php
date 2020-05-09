@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Game;
 use App\Models\GameMap;
 use App\Models\GameTeam;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 
 /**
@@ -46,6 +47,24 @@ class GameService extends BaseService
         }
 
         $game = $game->find($gameId);
+
+        return $game;
+    }
+
+    /**
+     * Gets the game where the game team belongs to
+     *
+     * @param int $gameTeamId
+     * @return Game|null
+     */
+    public function getGameOfParticipant(int $gameTeamId): ?Game
+    {
+        /** @var Game $game */
+        $game = Game::query()
+            ->whereHas('participants', function (Builder $builder) use ($gameTeamId): void {
+                $builder->where('id', $gameTeamId);
+            })
+            ->first();
 
         return $game;
     }
