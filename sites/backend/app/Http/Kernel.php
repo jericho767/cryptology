@@ -28,6 +28,9 @@ use Illuminate\Routing\Middleware\ThrottleRequests;
 use Illuminate\Routing\Middleware\ValidateSignature;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Spatie\Permission\Middlewares\PermissionMiddleware;
+use Spatie\Permission\Middlewares\RoleMiddleware;
+use Spatie\Permission\Middlewares\RoleOrPermissionMiddleware;
 
 /**
  * Class Kernel
@@ -99,5 +102,8 @@ class Kernel extends HttpKernel
         'game.running' => CheckGameIsRunning::class,
         'game.exists' => CheckGameExists::class,
         'game.team.integrity' => CheckGameTeamIntegrity::class,
+        'role' => RoleMiddleware::class,
+        'permission' => PermissionMiddleware::class,
+        'role_or_permission' => RoleOrPermissionMiddleware::class,
     ];
 }
