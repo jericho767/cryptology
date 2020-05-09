@@ -33,9 +33,9 @@ class GameService extends BaseService
      * Checks if the game is running
      *
      * @param int $gameId
-     * @return bool|null
+     * @return bool
      */
-    public function isGameRunning(int $gameId): ?bool
+    public function isGameRunning(int $gameId): bool
     {
         return Game::query()->find($gameId)->getAttribute('winner') === null;
     }
