@@ -22,7 +22,7 @@ class CheckRequestForJson
      */
     public function handle($request, Closure $next)
     {
-        if ($request->header('accept') === 'application/json') {
+        if ($request->wantsJson()) {
             return $next($request);
         }
 
