@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\CheckForMaintenanceMode;
+use App\Http\Middleware\CheckGameExists;
 use App\Http\Middleware\CheckGameIsRunning;
 use App\Http\Middleware\CheckRequestForJson;
 use App\Http\Middleware\EncryptCookies;
@@ -90,5 +91,6 @@ class Kernel extends HttpKernel
         'verified' => EnsureEmailIsVerified::class,
         'accept.json' => CheckRequestForJson::class,
         'game.running' => CheckGameIsRunning::class,
+        'game.exists' => CheckGameExists::class,
     ];
 }
