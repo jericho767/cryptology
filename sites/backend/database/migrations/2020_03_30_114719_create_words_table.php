@@ -19,6 +19,8 @@ class CreateWordsTable extends Migration
         Schema::create('words', function (Blueprint $table): void {
             $table->id();
             $table->string('word')->unique();
+            $table->unsignedTinyInteger('is_active')->default(1);
+            $table->unsignedBigInteger('created_by');
             $table->timestamps();
             $table->softDeletes();
         });
