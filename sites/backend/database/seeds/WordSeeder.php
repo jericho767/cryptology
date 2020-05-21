@@ -28,7 +28,7 @@ class WordSeeder extends Seeder
                     ->exists();
 
                 /** @var Player $wordCreator */
-                $wordCreator = $players->random(1);
+                $wordCreator = $players->random(1)[0];
                 $word->setAttribute('created_by', $wordCreator->getAttribute('id'));
 
                 if (!$hasExists) {
