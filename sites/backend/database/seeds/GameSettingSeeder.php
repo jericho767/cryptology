@@ -21,6 +21,7 @@ class GameSettingSeeder extends Seeder
             'max_teams' => 2,
             'min_players' => 2,
             'max_players' => 6,
+            'created_by' => PlayerSeeder::SUPER_ADMIN_DATA['id'],
         ]);
         $gameSetting->save();
     }
