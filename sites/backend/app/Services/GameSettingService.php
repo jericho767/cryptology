@@ -22,7 +22,15 @@ class GameSettingService extends BaseService
         parent::__construct();
         $this->currentGameSetting = GameSetting::query()
             ->orderBy('id', 'desc')
+            ->where('is_active', GameSetting::IS_ACTIVE)
             ->first();
+
+        if ($this->currentGameSetting === null) {
+            // Fallback game settings, fetch the latest added game setting
+            $this->currentGameSetting = GameSetting::query()
+                ->orderBy('id', 'desc')
+                ->first();
+        }
     }
 
     /**

@@ -22,6 +22,13 @@ class GameSetting extends BaseModel
     ];
 
     /**
+     * `is_active` identifier that tells that the `game_setting` object is active
+     *
+     * @var int
+     */
+    const IS_ACTIVE = 1;
+
+    /**
      * Validates the model.
      *
      * @return bool

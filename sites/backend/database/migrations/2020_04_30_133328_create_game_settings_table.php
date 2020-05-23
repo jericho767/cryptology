@@ -23,6 +23,7 @@ class CreateGameSettingsTable extends Migration
             $table->smallInteger('max_teams');
             $table->smallInteger('min_players');
             $table->smallInteger('max_players');
+            $table->unsignedTinyInteger('is_active')->default(0);
             $table->unsignedBigInteger('created_by');
             $table->timestamps();
             $table->softDeletes();
