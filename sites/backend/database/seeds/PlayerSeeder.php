@@ -11,14 +11,14 @@ use Illuminate\Support\Facades\Hash;
 class PlayerSeeder extends Seeder
 {
     const SUPER_ADMIN_DATA = [
-        'id' => 999,
+        'id' => 1,
         'name' => 'Jericho',
         'email' => 'boss.amo@power.com',
         'phone_number' => '09988451721',
     ];
 
     const ADMIN_DATA = [
-        'id' => 998,
+        'id' => 2,
         'name' => 'Admin',
         'email' => 'admin@power.com',
         'phone_number' => '09988451721',
