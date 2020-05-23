@@ -20,7 +20,7 @@ class UserRolePermissionSeeder extends Seeder
     public function run()
     {
         // Create permissions
-        foreach (Permissions::PERMISSIONS as $permission) {
+        foreach (Permissions::ALL as $permission) {
             Permission::create(['name' => $permission]);
         }
 

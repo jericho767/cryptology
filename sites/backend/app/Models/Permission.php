@@ -15,7 +15,7 @@ class Permission
      *
      * @var array
      */
-    const PERMISSIONS = [
+    const ALL = [
         // Word model
         'words.create' => 'create words',
         'words.read' => 'read words',
