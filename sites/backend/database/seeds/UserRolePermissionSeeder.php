@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Permission as Permissions;
 use App\Models\Player;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
@@ -18,38 +19,8 @@ class UserRolePermissionSeeder extends Seeder
      */
     public function run()
     {
-        // List of permissions
-        $permissions = [
-            // Word model
-            'create words',
-            'read words',
-            'update words',
-            'delete words',
-            'search words',
-            // GameSetting model
-            'create game settings',
-            'read game settings',
-            'update game settings',
-            'delete game settings',
-            'search game settings',
-            // Player model
-            'create players',
-            'read players',
-            'update players',
-            'delete players',
-            'search players',
-            // PlayerActivity model
-            'read player activities',
-            // Game model
-            'create games',
-            'read games',
-            'update games',
-            'delete games',
-            'search games',
-        ];
-
         // Create permissions
-        foreach ($permissions as $permission) {
+        foreach (Permissions::PERMISSIONS as $permission) {
             Permission::create(['name' => $permission]);
         }
 
