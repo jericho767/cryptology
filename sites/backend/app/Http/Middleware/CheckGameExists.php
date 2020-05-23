@@ -34,7 +34,7 @@ class CheckGameExists
      */
     public function handle($request, Closure $next)
     {
-        $gameId = $request->all(['gameId'])['gameId'];
+        $gameId = $request->all('gameId')['gameId'];
 
         if ($this->gameService->getGame($gameId) !== null) {
             return $next($request);

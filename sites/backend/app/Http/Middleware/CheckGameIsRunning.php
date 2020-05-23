@@ -44,7 +44,7 @@ class CheckGameIsRunning
          *       it does not match with the actual
          *       method type
          */
-        $gameId = $request->all(['gameId'])['gameId'];
+        $gameId = $request->all('gameId')['gameId'];
 
         if ($this->gameService->isGameRunning($gameId)) {
             return $next($request);

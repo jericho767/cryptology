@@ -34,10 +34,11 @@ class CheckGameTeamIntegrity
      */
     public function handle($request, Closure $next)
     {
+        $params = $request->all(['gameTeamId', 'gameId']);
         // Fetch the gameTeamId
-        $gameTeamId = $request->all(['gameTeamId'])['gameTeamId'];
+        $gameTeamId = $params['gameTeamId'];
         // Fetch the gameId
-        $gameId = $request->all(['gameId'])['gameId'];
+        $gameId = $params['gameId'];
 
         // Incomplete parameters
         if ($gameTeamId === null || $gameId === null) {
