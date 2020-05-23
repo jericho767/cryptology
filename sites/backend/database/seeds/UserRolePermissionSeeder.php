@@ -4,6 +4,7 @@ use App\Models\Player;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use App\Models\Role as Roles;
 
 /**
  * Class RoleSeeder
@@ -53,9 +54,9 @@ class UserRolePermissionSeeder extends Seeder
         }
 
         // Create the super admin role
-        $superAdminRole = Role::create(['name' => 'super-admin']);
+        $superAdminRole = Role::create(['name' => Roles::SUPER_ADMIN]);
         // Create admin role
-        $adminRole = Role::create(['name' => 'admin']);
+        $adminRole = Role::create(['name' => Roles::ADMIN]);
 
         // Add permissions to the admin role
         $adminRole->givePermissionTo([
