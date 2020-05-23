@@ -26,6 +26,6 @@ class CheckRequestForJson
             return $next($request);
         }
 
-        throw new Exception('Invalid request.');
+        throw new Exception('I only answer to JSON requests bitch.');
     }
 }
