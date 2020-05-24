@@ -22,4 +22,10 @@ class Role
      * @var string
      */
     const ADMIN = 'admin';
+    /**
+     * Basic ass
+     *
+     * @var string
+     */
+    const PLAYER = 'player';
 }
