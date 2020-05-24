@@ -9,6 +9,7 @@ use App\Http\Middleware\CheckGameIsRunning;
 use App\Http\Middleware\CheckGameTeamIntegrity;
 use App\Http\Middleware\CheckRequestForJson;
 use App\Http\Middleware\EncryptCookies;
+use App\Http\Middleware\HandleModel;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Middleware\TrimStrings;
 use App\Http\Middleware\TrustProxies;
@@ -105,5 +106,6 @@ class Kernel extends HttpKernel
         'role' => RoleMiddleware::class,
         'permission' => PermissionMiddleware::class,
         'role_or_permission' => RoleOrPermissionMiddleware::class,
+        'handle' => HandleModel::class,
     ];
 }
