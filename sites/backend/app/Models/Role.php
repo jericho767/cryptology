@@ -20,7 +20,5 @@ class Role
         'super.admin' => 'super-admin',
         // Role identifier for administrator accounts
         'admin' => 'admin',
-        // Basic ass
-        'player' => 'player',
     ];
 }
