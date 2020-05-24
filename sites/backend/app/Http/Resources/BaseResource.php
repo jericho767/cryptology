@@ -29,6 +29,10 @@ class BaseResource extends JsonResource
      */
     protected function formatDate(Carbon $date = null, string $format = self::DATE_FORMAT): string
     {
+        if ($date === null) {
+            return '';
+        }
+
         return $date->format($format);
     }
 }
