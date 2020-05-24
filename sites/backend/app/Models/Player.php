@@ -23,6 +23,10 @@ class Player extends Authenticatable implements MustVerifyEmail
     protected $fillable = ['name', 'email', 'phone_number', 'password'];
     protected $hidden = ['password'];
 
+    protected $dates = [
+        'email_verified_at',
+    ];
+
     /**
      * @var int Maximum acceptable length of the name attribute
      */
