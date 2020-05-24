@@ -11,21 +11,16 @@ namespace App\Models;
 class Role
 {
     /**
-     * Role identifier for Super administrator accounts
+     * List of all roles
      *
-     * @var string
+     * @var array
      */
-    const SUPER_ADMIN = 'super-admin';
-    /**
-     * Role identifier for administrator accounts
-     *
-     * @var string
-     */
-    const ADMIN = 'admin';
-    /**
-     * Basic ass
-     *
-     * @var string
-     */
-    const PLAYER = 'player';
+    const ALL = [
+        // Role identifier for Super administrator accounts
+        'super.admin' => 'super-admin',
+        // Role identifier for administrator accounts
+        'admin' => 'admin',
+        // Basic ass
+        'player' => 'player',
+    ];
 }
