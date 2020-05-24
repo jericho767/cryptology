@@ -30,9 +30,7 @@ class HandleGameSetting
         $player = $request->user();
 
         switch ($request->route()->getName()) {
-            case 'game_settings.create':
             case 'game_settings.view':
-            case 'game_settings.viewAll':
                 if (!$player->hasRole(Roles::ALL['admin'])) {
                     throw new Exception('You just cant cunt.');
                 }
