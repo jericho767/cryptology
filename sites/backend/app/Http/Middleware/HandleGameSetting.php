@@ -24,7 +24,7 @@ class HandleGameSetting
      * @return mixed
      * @throws Exception
      */
-    public function handle($request, Closure $next, GameSetting $gameSetting)
+    public function handle(Request $request, Closure $next, GameSetting $gameSetting)
     {
         /** @var Player $player */
         $player = $request->user();
