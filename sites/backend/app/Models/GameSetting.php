@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use Mockery\Exception;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Exception;
 
 /**
  * Class GameSetting
@@ -27,6 +28,16 @@ class GameSetting extends BaseModel
      * @var int
      */
     const IS_ACTIVE = 1;
+
+    /**
+     * RELATION for `Player` model
+     *
+     * @return BelongsTo
+     */
+    public function createdBy(): BelongsTo
+    {
+        return $this->belongsTo(Player::class, 'created_by', 'id');
+    }
 
     /**
      * Validates the model.

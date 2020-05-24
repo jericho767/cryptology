@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Models\Permission as Permissions;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['middleware' => ['auth:api', 'accept.json']], function () {
+    /**
+     * Game Settings
+     */
+    Route::group(['prefix' => 'game-settings', 'as' => 'game_settings.'], function () {
+        // View
+        Route::get('{gameSetting}', 'GameSettingController@show')
+        ->middleware([
+            'can:' . Permissions::ALL['gameSettings.read'],
+            'handle:gameSetting,gameSetting',
+        ])
+        ->name('view');
+    });
 });
