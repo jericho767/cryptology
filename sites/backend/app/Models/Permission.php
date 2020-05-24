@@ -17,30 +17,30 @@ class Permission
      */
     const ALL = [
         // Word model
-        'words.create' => 'create words',
-        'words.read' => 'read words',
-        'words.update' => 'update words',
-        'words.delete' => 'delete words',
-        'words.search' => 'search words',
+        'words.create' => 'words.create',
+        'words.read' => 'words.read',
+        'words.update' => 'words.update',
+        'words.delete' => 'words.delete',
+        'words.search' => 'words.search',
         // GameSetting model
-        'gameSettings.create' => 'create game settings',
-        'gameSettings.read' => 'read game settings',
-        'gameSettings.update' => 'update game settings',
-        'gameSettings.delete' => 'delete game settings',
-        'gameSettings.search' => 'search game settings',
+        'gameSettings.create' => 'gameSettings.create',
+        'gameSettings.read' => 'gameSettings.read',
+        'gameSettings.update' => 'gameSettings.update',
+        'gameSettings.delete' => 'gameSettings.delete',
+        'gameSettings.search' => 'gameSettings.search',
         // Player model
-        'players.create' => 'create players',
-        'players.read' => 'read players',
-        'players.update' => 'update players',
-        'players.delete' => 'delete players',
-        'players.search' => 'search players',
+        'players.create' => 'players.create',
+        'players.read' => 'players.read',
+        'players.update' => 'players.update',
+        'players.delete' => 'players.delete',
+        'players.search' => 'players.search',
         // PlayerActivity model
-        'playerActivities.read' => 'read player activities',
+        'playerActivities.read' => 'playerActivities.read',
         // Game model
-        'games.create' => 'create games',
-        'games.read' => 'read games',
-        'games.update' => 'update games',
-        'games.delete' => 'delete games',
-        'games.search' => 'search games',
+        'games.create' => 'games.create',
+        'games.read' => 'games.read',
+        'games.update' => 'games.update',
+        'games.delete' => 'games.delete',
+        'games.search' => 'games.search',
     ];
 }
