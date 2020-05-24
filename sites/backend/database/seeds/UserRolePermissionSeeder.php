@@ -31,14 +31,14 @@ class UserRolePermissionSeeder extends Seeder
 
         // Add permissions to the admin role
         $adminRole->givePermissionTo([
-            'create words',
-            'read words',
-            'search words',
-            'read game settings',
-            'read players',
-            'search players',
-            'read games',
-            'search games',
+            Permissions::ALL['words.create'],
+            Permissions::ALL['words.read'],
+            Permissions::ALL['words.search'],
+            Permissions::ALL['gameSettings.read'],
+            Permissions::ALL['players.read'],
+            Permissions::ALL['players.search'],
+            Permissions::ALL['games.read'],
+            Permissions::ALL['games.search'],
         ]);
 
         // Assign roles to users
