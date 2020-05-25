@@ -16,7 +16,7 @@ class GameSetting extends BaseResource
      * @param $request
      * @return array
      */
-    public function toArray($request)
+    public function toArray($request): array
     {
         return [
             'id' => $this->resource->getAttribute('id'),
