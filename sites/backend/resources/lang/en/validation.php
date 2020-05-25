@@ -130,8 +130,11 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'map_size' => [
+            'guess_count_integrity' => 'Cannot fit role blocks in the map.',
+        ],
+        'guess_count' => [
+            'map_size_integrity' => 'All role blocks cannot fit on the map.',
         ],
     ],
 
