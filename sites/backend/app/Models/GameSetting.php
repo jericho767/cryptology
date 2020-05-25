@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Exception;
 
 /**
  * Class GameSetting
@@ -30,6 +29,53 @@ class GameSetting extends BaseModel
     const IS_ACTIVE = 1;
 
     /**
+     * `is_active` identifier that tells that the `game_setting` object is NOT active
+     */
+    const IS_NOT_ACTIVE = 0;
+
+    /**
+     * Allowed maximum size of the map
+     *
+     * @var int
+     */
+    const ALLOWED_MAX_MAP_SIZE = 49;
+
+    /**
+     * Allowed minimum size of the map
+     *
+     * @var int
+     */
+    const ALLOWED_MIN_MAP_SIZE = 16;
+
+    /**
+     * Allowed minimum number of players per team to play
+     *
+     * @var int
+     */
+    const ALLOWED_MIN_PLAYERS = 2;
+
+    /**
+     * Allowed maximum number of players per team to play
+     *
+     * @var int
+     */
+    const ALLOWED_MAX_PLAYERS = 7;
+
+    /**
+     * Allowed maximum number of teams to play in a game
+     *
+     * @var int
+     */
+    const ALLOWED_MAX_TEAMS = 4;
+
+    /**
+     * Allowed minimum number of teams to play in a game
+     *
+     * @var int
+     */
+    const ALLOWED_MIN_TEAMS = 2;
+
+    /**
      * RELATION for `Player` model
      *
      * @return BelongsTo
@@ -37,80 +83,5 @@ class GameSetting extends BaseModel
     public function createdBy(): BelongsTo
     {
         return $this->belongsTo(Player::class, 'created_by', 'id');
-    }
-
-    /**
-     * Validates the model.
-     *
-     * @return bool
-     *
-     * @throws Exception
-     */
-    protected function validate(): bool
-    {
-        $mapSize = $this->getAttribute('map_size');
-        $guessCount = $this->getAttribute('guess_count');
-        $maxTeams = $this->getAttribute('max_teams');
-        $minPlayers = $this->getAttribute('min_players');
-        $maxPlayers = $this->getAttribute('max_players');
-
-        if ($guessCount < 1) {
-            throw new Exception('Guess count cannot be zero.');
-        }
-
-        // 2 is the least number of teams to operate a game
-        if ($maxTeams < 2) {
-            throw new Exception('Team count must be at least 2.');
-        }
-
-        // 2 is the least number of players for a team to play (1 for guesser, 1 for game master)
-        if ($minPlayers < 2 || $maxPlayers < 2) {
-            throw new Exception('Player count needs to be at least 2.');
-        }
-
-        // Validate integrity between min and max players
-        if ($minPlayers > $maxPlayers) {
-            throw new Exception('Min and max players values are crazy.');
-        }
-
-        // Blocks that have roles(assassin or for a team)
-        $roleBlocks = 0;
-
-        // Additional blocks for each team
-        for ($i = 0; $i < $maxTeams; $i++) {
-            /*
-             * $i - count of blocks for additional guess for each team
-             * 0 - added for the 1st team
-             * 1 - for the 2nd
-             * 2 - for the 3rd
-             * and so forth
-             */
-            $roleBlocks += $i;
-        }
-
-        // Number of assassins
-        $assassinsCount = $maxTeams - 1;
-
-        // Total role blocks
-        $roleBlocks += $guessCount * $maxTeams + $assassinsCount;
-
-        // Map size cannot be less than or equal, there'll be no more room for non-role block(civilians)
-        if ($mapSize <= $roleBlocks) {
-            throw new Exception('Cannot fit number of role blocks in the map.');
-        }
-
-        return true;
-    }
-
-    public static function boot(): void
-    {
-        parent::boot();
-
-        $callback = function(GameSetting $model): void {
-            $model->validate();
-        };
-
-        self::creating($callback);
-        self::updating($callback);
     }
 }
