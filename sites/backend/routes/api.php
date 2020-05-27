@@ -19,12 +19,17 @@ Route::group(['middleware' => ['auth:api', 'accept.json']], function () {
      * Game Settings
      */
     Route::group(['prefix' => 'game-settings', 'as' => 'game_settings.'], function () {
+        // Create
+        Route::post('', 'GameSettingController@store')
+            ->middleware('can:' . Permissions::ALL['gameSettings.create'])
+            ->name('create');
+
         // View
         Route::get('{gameSetting}', 'GameSettingController@show')
-        ->middleware([
-            'can:' . Permissions::ALL['gameSettings.read'],
-            'handle:gameSetting,gameSetting',
-        ])
-        ->name('view');
+            ->middleware([
+                'can:' . Permissions::ALL['gameSettings.read'],
+                'handle:gameSetting,gameSetting',
+            ])
+            ->name('view');
     });
 });

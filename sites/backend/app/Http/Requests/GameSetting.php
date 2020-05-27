@@ -54,8 +54,74 @@ class GameSetting extends BaseRequest
         ];
     }
 
+    /**
+     * Gets the map_size value
+     *
+     * @return int
+     */
+    public function getMapSize(): int
+    {
+        return intval($this->get('map_size'));
+    }
+
+    /**
+     * Gets the guess_count value
+     *
+     * @return int
+     */
+    public function getGuessCount(): int
+    {
+        return intval($this->get('guess_count'));
+    }
+
+    /**
+     * Gets the max_teams value
+     *
+     * @return int
+     */
+    public function getMaxTeams(): int
+    {
+        return intval($this->get('max_teams'));
+    }
+
+    /**
+     * Gets the min_players value
+     *
+     * @return int
+     */
+    public function getMinPlayers(): int
+    {
+        return intval($this->get('min_players'));
+    }
+
+    /**
+     * Gets the max_players value
+     *
+     * @return int
+     */
+    public function getMaxPlayers(): int
+    {
+        return intval($this->get('max_players'));
+    }
+
+    /**
+     * Gets the is_active value
+     *
+     * @return int
+     */
+    public function getIsActive(): int
+    {
+        return intval($this->get('is_active'));
+    }
+
+    /**
+     * Method call after validations are passed
+     *
+     * @return void
+     */
     protected function passedValidation(): void
     {
+        // Make additional validation for the integrity of the map and guess size
         $this->validate([
             'map_size' => 'guess_count_integrity',
             'guess_count' => 'map_size_integrity',

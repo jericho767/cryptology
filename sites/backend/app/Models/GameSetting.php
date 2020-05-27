@@ -19,6 +19,8 @@ class GameSetting extends BaseModel
         'max_teams', // Maximum number of teams that can play in a game
         'min_players', // Minimum number of players that a team can have in order to play
         'max_players', // Maximum number of players that a team can have in order to play
+        'is_active', // Status of the game setting
+        'created_by', // The creator of the game setting
     ];
 
     /**

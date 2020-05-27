@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\GameSetting;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class GameSettingService
@@ -31,6 +32,43 @@ class GameSettingService extends BaseService
                 ->orderBy('id', 'desc')
                 ->first();
         }
+    }
+
+    /**
+     * Creates a `game_settings` entry
+     *
+     * @param array $data
+     * @return null|GameSetting
+     */
+    public function create(array $data): ?GameSetting
+    {
+        $gameSetting = null;
+
+        DB::transaction(function () use ($data, &$gameSetting) {
+            // Newly inserted is set to be an active game setting
+            if (isset($data['is_active']) && $data['is_active'] === GameSetting::IS_ACTIVE) {
+                // Deactivate all existing game settings
+                $this->deactivateAll();
+            }
+
+            $gameSetting = GameSetting::create($data);
+        });
+
+        return $gameSetting;
+    }
+
+    /**
+     * Deactivates all existing `game_settings`
+     *
+     * @return void
+     */
+    private function deactivateAll(): void
+    {
+        DB::transaction(function () {
+            GameSetting::query()
+                ->where('is_active', GameSetting::IS_ACTIVE)
+                ->update(['is_active' => GameSetting::IS_NOT_ACTIVE]);
+        });
     }
 
     /**
