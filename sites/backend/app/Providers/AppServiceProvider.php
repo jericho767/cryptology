@@ -31,9 +31,9 @@ class AppServiceProvider extends ServiceProvider
     {
         $ruleCallback = function ($attribute, $value, $params, Validator $validator): bool
         {
-            $maxTeams = $validator->getData()['max_teams'];
-            $guessCount = $validator->getData()['guess_count'];
-            $mapSize = $validator->getData()['map_size'];
+            $maxTeams = intval($validator->getData()['max_teams']);
+            $guessCount = intval($validator->getData()['guess_count']);
+            $mapSize = intval($validator->getData()['map_size']);
 
             // Blocks that have roles(assassin or for a team)
             $roleBlocks = 0;
