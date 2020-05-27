@@ -15,7 +15,7 @@ class GameSetting extends BaseRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'map_size' => [
@@ -54,7 +54,7 @@ class GameSetting extends BaseRequest
         ];
     }
 
-    protected function passedValidation()
+    protected function passedValidation(): void
     {
         $this->validate([
             'map_size' => 'guess_count_integrity',
