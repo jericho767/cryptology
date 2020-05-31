@@ -120,4 +120,20 @@ class GameSetting extends BaseModel
     {
         return $this->belongsTo(Player::class, 'created_by', 'id');
     }
+
+    /**
+     * Gets the column to be filtered base on the filter field value.
+     *
+     * @param $filterField
+     * @return string
+     */
+    public static function getColumnByFilterField($filterField): string
+    {
+        return collect(self::FILTER_BY)
+            ->filter(function ($field) use ($filterField) {
+                return $field === $filterField;
+            })
+            ->keys()
+            ->first();
+    }
 }
