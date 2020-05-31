@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
@@ -25,6 +26,23 @@ class BaseRequest extends FormRequest
     public function authorize(): bool
     {
         return true;
+    }
+
+
+    /**
+     * Parses the request to Carbon.
+     *
+     * @param string $request
+     * @param bool $resetTime
+     * @return Carbon
+     */
+    protected function toDate(string $request, bool $resetTime = true): Carbon
+    {
+        if ($resetTime) {
+            return Carbon::createFromFormat($this->dateFormat, $request)->startOfDay();
+        } else {
+            return Carbon::createFromFormat($this->dateFormat, $request);
+        }
     }
 
     /**

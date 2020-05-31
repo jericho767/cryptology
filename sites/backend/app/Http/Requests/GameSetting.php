@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use App\Models\GameSetting as GameSettingModel;
 use App\Models\Player;
-use Carbon\Carbon;
 use Illuminate\Validation\Rule;
 
 /**
@@ -267,9 +266,9 @@ class GameSetting extends BaseRequest
                 // Typecast the value of the created at to Carbon
                 $filters[$filter] = [
                     'start' => isset($request[$filter]['start']) ?
-                        Carbon::createFromFormat($this->dateFormat, $request[$filter]['start']) : null,
+                        $this->toDate($request[$filter]['start']) : null,
                     'end' => isset($request[$filter]['end']) ?
-                        Carbon::createFromFormat($this->dateFormat, $request[$filter]['end']) : null,
+                        $this->toDate($request[$filter]['end']) : null,
                 ];
             } elseif ($filter === GameSettingModel::FILTER_BY['created_by']) {
                 // Typecast all IDs inside the array to be integers
