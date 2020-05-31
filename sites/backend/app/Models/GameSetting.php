@@ -136,4 +136,20 @@ class GameSetting extends BaseModel
             ->keys()
             ->first();
     }
+
+    /**
+     * Gets the column to be sorted base on the sort field value.
+     *
+     * @param $filterField
+     * @return string
+     */
+    public static function getColumnBySortField($filterField): string
+    {
+        return collect(self::SORT_BY)
+            ->filter(function ($field) use ($filterField) {
+                return $field === $filterField;
+            })
+            ->keys()
+            ->first();
+    }
 }
