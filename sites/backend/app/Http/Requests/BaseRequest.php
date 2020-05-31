@@ -33,14 +33,19 @@ class BaseRequest extends FormRequest
      * Parses the request to Carbon.
      *
      * @param string $request
-     * @param bool $resetTime
+     * @param bool|null $isStartOfDay
      * @return Carbon
      */
-    protected function toDate(string $request, bool $resetTime = true): Carbon
+    protected function toDate(string $request, ?bool $isStartOfDay = null): Carbon
     {
-        if ($resetTime) {
+        if ($isStartOfDay) {
+            // Resets to the start of the day
             return Carbon::createFromFormat($this->dateFormat, $request)->startOfDay();
+        } elseif ($isStartOfDay === false) {
+            // Resets to the end of the day
+            return Carbon::createFromFormat($this->dateFormat, $request)->endOfDay();
         } else {
+            // No reset
             return Carbon::createFromFormat($this->dateFormat, $request);
         }
     }

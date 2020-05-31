@@ -266,9 +266,9 @@ class GameSetting extends BaseRequest
                 // Typecast the value of the created at to Carbon
                 $filters[$filter] = [
                     'start' => isset($request[$filter]['start']) ?
-                        $this->toDate($request[$filter]['start']) : null,
+                        $this->toDate($request[$filter]['start'], true) : null,
                     'end' => isset($request[$filter]['end']) ?
-                        $this->toDate($request[$filter]['end']) : null,
+                        $this->toDate($request[$filter]['end'], false) : null,
                 ];
             } elseif ($filter === GameSettingModel::FILTER_BY['created_by']) {
                 // Typecast all IDs inside the array to be integers
