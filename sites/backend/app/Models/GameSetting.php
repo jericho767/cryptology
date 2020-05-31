@@ -24,6 +24,40 @@ class GameSetting extends BaseModel
     ];
 
     /**
+     * Fields and logic that can be filtered by
+     * key -> attribute name
+     * value -> filter keyword
+     *
+     * @var array
+     */
+    const FILTER_BY = [
+        'map_size' => 'map_size', // map_size field
+        'guess_count' => 'guess_count', // guest_count field
+        'max_teams' => 'max_teams', // max_teams field
+        'min_players' => 'min_players', // min_players field
+        'max_players' => 'max_players', // max_players field
+        'created_by' => 'created_by', // created_by field
+        'created_at' => 'created_at', // created_at field
+    ];
+
+    /**
+     * Fields and logic that can be sorted by
+     * key -> attribute name
+     * value -> filter keyword
+     *
+     * @var array
+     */
+    const SORT_BY = [
+        'map_size' => 'map_size', // map_size field
+        'guess_count' => 'guess_count', // guest_count field
+        'max_teams' => 'max_teams', // max_teams field
+        'min_players' => 'min_players', // min_players field
+        'max_players' => 'max_players', // max_players field
+        'created_by' => 'created_by', // created_by field
+        'created_at' => 'created_at', // created_at field
+    ];
+
+    /**
      * `is_active` identifier that tells that the `game_setting` object is active
      *
      * @var int
