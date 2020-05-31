@@ -6,6 +6,7 @@ use App\Http\Requests\GameSetting as GameSettingRequest;
 use App\Models\GameSetting;
 use App\Http\Resources\GameSetting as GameSettingResource;
 use App\Services\GameSettingService;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 /**
  * Class GameSettingController
@@ -23,6 +24,23 @@ class GameSettingController extends Controller
     {
         parent::__construct();
         $this->gameSettingService = $gameSettingService;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param GameSettingRequest $request
+     * @return AnonymousResourceCollection
+     */
+    public function index(GameSettingRequest $request): AnonymousResourceCollection
+    {
+        return GameSettingResource::collection(
+            $this->gameSettingService->all(
+                $request->getFilters(),
+                $request->getSort(),
+                $request->getSortBy()
+            )
+        );
     }
 
     /**

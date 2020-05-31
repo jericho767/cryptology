@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Models\GameSetting;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -32,6 +34,69 @@ class GameSettingService extends BaseService
                 ->orderBy('id', 'desc')
                 ->first();
         }
+    }
+
+    /**
+     * Gets all entries of game settings base on the filters and sort
+     *
+     * @param array $filters
+     * @param string|null $sort
+     * @param string|null $sortBy
+     * @return Collection
+     */
+    public function all(array $filters, ?string $sort, ?string $sortBy): Collection
+    {
+        // Initialize query
+        $query = GameSetting::query();
+
+        // Iterate all given filters
+        foreach ($filters as $filter => $params) {
+            // Fetch the column to be filtered base on the request field name
+            $column = GameSetting::getColumnByFilterField($filter);
+
+            // This is where the filtering happens, it's self-explanatory
+            switch ($column) {
+                case 'created_by':
+                    if ($params !== null && is_array($params)) {
+                        $query->whereIn($column, $params);
+                    }
+                    break;
+                case 'map_size':
+                case 'guess_count':
+                case 'max_teams':
+                case 'min_players':
+                case 'max_players':
+                case 'created_at':
+                    $start = $params['start'];
+                    $end = $params['end'];
+
+                    if ($start !== null && $end !== null) {
+                        // Both start and end are set, use between clause
+                        $query->whereBetween($column, [$start, $end]);
+                    } elseif ($start === null && $end !== null) {
+                        // Only the end part is set
+                        if ($end instanceof Carbon) {
+                            $query->whereDate($column, '<=', $end);
+                        } else {
+                            $query->where($column, '<=', $end);
+                        }
+                    } elseif ($start !== null && $end === null) {
+                        // Only the start part is set
+                        if ($start instanceof Carbon) {
+                            $query->whereDate($column, '>=', $start);
+                        } else {
+                            $query->where($column, '>=', $start);
+                        }
+                    }
+            }
+        }
+
+        // Apply sorting
+        if ($sort !== null && $sortBy !== null) {
+            $query->orderBy(GameSetting::getColumnBySortField($sortBy), $sort);
+        }
+
+        return $query->get();
     }
 
     /**

@@ -31,5 +31,10 @@ Route::group(['middleware' => ['auth:api', 'accept.json']], function () {
                 'handle:gameSetting,gameSetting',
             ])
             ->name('view');
+
+        // List
+        Route::get('', 'GameSettingController@index')
+            ->middleware('can:' . Permissions::ALL['gameSettings.read'])
+            ->name('index');
     });
 });
