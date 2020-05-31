@@ -29,8 +29,28 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $ruleCallback = function ($attribute, $value, $params, Validator $validator): bool
-        {
+        // Add custom validations
+        $this->addValidations();
+    }
+
+    /**
+     * Add user defined validations.
+     *
+     * @return void
+     */
+    private function addValidations()
+    {
+        $this->addMapGuessCountIntegrity();
+    }
+
+    /**
+     * Validation for the integrity between map size and guess count.
+     *
+     * @return void
+     */
+    private function addMapGuessCountIntegrity(): void
+    {
+        $ruleCallback = function ($attribute, $value, $params, Validator $validator): bool {
             $maxTeams = intval($validator->getData()['max_teams']);
             $guessCount = intval($validator->getData()['guess_count']);
             $mapSize = intval($validator->getData()['map_size']);
