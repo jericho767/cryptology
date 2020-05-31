@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Models\GameSetting as GameSettingModel;
 use App\Models\Player;
+use Carbon\Carbon;
 use Illuminate\Validation\Rule;
 
 /**
@@ -35,7 +36,7 @@ class GameSetting extends BaseRequest
     }
 
     /**
-     * Gets the rules for the list route
+     * Gets the rules for the list route.
      *
      * @return array
      */
@@ -112,16 +113,16 @@ class GameSetting extends BaseRequest
                 'array',
             ],
             'filter.created_at.start' => [
-                'date_format:Y-m-d',
+                'date_format:' . $this->dateFormat,
             ],
             'filter.created_at.end' => [
-                'date_format:Y-m-d',
+                'date_format:' . $this->dateFormat,
             ],
         ];
     }
 
     /**
-     * Get the rules that will be applied to the fields of the model
+     * Get the rules that will be applied to the fields of the model.
      *
      * @return array
      */
@@ -165,7 +166,7 @@ class GameSetting extends BaseRequest
     }
 
     /**
-     * Gets the map_size value
+     * Gets the map_size value.
      *
      * @return int
      */
@@ -175,7 +176,7 @@ class GameSetting extends BaseRequest
     }
 
     /**
-     * Gets the guess_count value
+     * Gets the guess_count value.
      *
      * @return int
      */
@@ -185,7 +186,7 @@ class GameSetting extends BaseRequest
     }
 
     /**
-     * Gets the max_teams value
+     * Gets the max_teams value.
      *
      * @return int
      */
@@ -195,7 +196,7 @@ class GameSetting extends BaseRequest
     }
 
     /**
-     * Gets the min_players value
+     * Gets the min_players value.
      *
      * @return int
      */
@@ -205,7 +206,7 @@ class GameSetting extends BaseRequest
     }
 
     /**
-     * Gets the max_players value
+     * Gets the max_players value.
      *
      * @return int
      */
@@ -215,13 +216,76 @@ class GameSetting extends BaseRequest
     }
 
     /**
-     * Gets the is_active value
+     * Gets the is_active value.
      *
      * @return int
      */
     public function getIsActive(): int
     {
         return intval($this->get('is_active'));
+    }
+
+    /**
+     * Gets the sorted property.
+     *
+     * @return null|string
+     */
+    public function getSort(): ?string
+    {
+        return $this->get('sort');
+    }
+
+    /**
+     * Gets how the property will be sorted.
+     *
+     * @return null|string
+     */
+    public function getSortBy(): ?string
+    {
+        return $this->get('sortBy');
+    }
+
+    /**
+     * Fetches the filters.
+     *
+     * @return array
+     */
+    public function getFilters(): array
+    {
+        $filters = [];
+        $request = $this->get('filter');
+
+
+        // Add the filters of `created_at`
+        $filters['created_at'] = $request[GameSettingModel::FILTER_BY['created_at']] ?? [];
+
+        foreach (GameSettingModel::FILTER_BY as $filter) {
+            // Fetch filter from the request
+            $filters[$filter] = $request[$filter] ?? [];
+
+            if ($filter === GameSettingModel::FILTER_BY['created_at']) {
+                // Typecast the value of the created at to Carbon
+                $filters[$filter] = [
+                    'start' => isset($request[$filter]['start']) ?
+                        Carbon::createFromFormat($this->dateFormat, $request[$filter]['start']) : null,
+                    'end' => isset($request[$filter]['end']) ?
+                        Carbon::createFromFormat($this->dateFormat, $request[$filter]['end']) : null,
+                ];
+            } elseif ($filter === GameSettingModel::FILTER_BY['created_by']) {
+                // Typecast all IDs inside the array to be integers
+                $filters[$filter] = isset($request[$filter]) ? array_map('intval', $request[$filter]) : null;
+            } else {
+                // Basic filter of `start` and `end` with integer values
+                $filters[$filter] = $request[$filter] ?? [];
+                // Try to parse value to integer, if 0 is returned, the value of the index will be null instead
+                $filters[$filter] = [
+                    'start' => intval($filters[$filter]['start'] ?? null) ?: null,
+                    'end' => intval($filters[$filter]['end'] ?? null) ?: null,
+                ];
+            }
+        }
+
+        return $filters;
     }
 
     /**
