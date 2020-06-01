@@ -28,6 +28,7 @@ class Permission
         'gameSettings.update' => 'gameSettings.update',
         'gameSettings.delete' => 'gameSettings.delete',
         'gameSettings.search' => 'gameSettings.search',
+        'gameSettings.activate' => 'gameSettings.activate',
         // Player model
         'players.create' => 'players.create',
         'players.read' => 'players.read',
