@@ -44,7 +44,7 @@ class GameSettingController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Creates a new resource.
      *
      * @param GameSettingRequest $request
      * @return GameSettingResource
@@ -74,5 +74,26 @@ class GameSettingController extends Controller
     {
         $gameSetting->load('createdBy');
         return new GameSettingResource($gameSetting);
+    }
+
+    /**
+     * Updates a resource.
+     *
+     * @param GameSettingRequest $request
+     * @param GameSetting $gameSetting
+     * @return GameSettingResource
+     */
+    public function update(GameSettingRequest $request, GameSetting $gameSetting): GameSettingResource
+    {
+        $data = [
+            'map_size' => $request->getMapSize(),
+            'guess_count' => $request->getGuessCount(),
+            'max_teams' => $request->getMaxTeams(),
+            'min_players' => $request->getMinPlayers(),
+            'max_players' => $request->getMaxPlayers(),
+            'is_active' => $request->getIsActive(),
+        ];
+
+        return new GameSettingResource($this->gameSettingService->update($data, $gameSetting));
     }
 }

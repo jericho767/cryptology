@@ -36,5 +36,13 @@ Route::group(['middleware' => ['auth:api', 'accept.json']], function () {
         Route::get('', 'GameSettingController@index')
             ->middleware('can:' . Permissions::ALL['gameSettings.read'])
             ->name('index');
+
+        // Update
+        Route::put('{gameSetting}', 'GameSettingController@update')
+            ->middleware([
+                'can:' . Permissions::ALL['gameSettings.update'],
+                'handle:gameSetting,gameSetting',
+            ])
+            ->name('update');
     });
 });

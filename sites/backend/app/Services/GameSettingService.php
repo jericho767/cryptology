@@ -111,12 +111,34 @@ class GameSettingService extends BaseService
 
         DB::transaction(function () use ($data, &$gameSetting) {
             // Newly inserted is set to be an active game setting
-            if (isset($data['is_active']) && $data['is_active'] === GameSetting::IS_ACTIVE) {
+            if ($data['is_active'] ?? $data['is_active'] === GameSetting::IS_ACTIVE) {
                 // Deactivate all existing game settings
                 $this->deactivateAll();
             }
 
             $gameSetting = GameSetting::create($data);
+        });
+
+        return $gameSetting;
+    }
+
+    /**
+     * Updates a `game_settings` entry
+     *
+     * @param array $data
+     * @param GameSetting $gameSetting
+     * @return GameSetting|null
+     */
+    public function update(array $data, GameSetting $gameSetting): ?GameSetting
+    {
+        DB::transaction(function () use ($data, &$gameSetting) {
+            // Newly updated game setting is set to be active
+            if ($data['is_active'] ?? $data['is_active'] === GameSetting::IS_ACTIVE) {
+                // Deactivate all existing game settings
+                $this->deactivateAll();
+            }
+
+            $gameSetting->update($data);
         });
 
         return $gameSetting;
