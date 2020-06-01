@@ -24,6 +24,7 @@ class GameSetting extends BaseRequest
         // Appropriately set the rules
         switch ($this->route()->getName()) {
             case 'game_settings.create':
+            case 'game_settings.update':
                 $this->isCreateOrUpdate = true;
                 return $this->getDataRules();
             case 'game_settings.index':
@@ -157,6 +158,17 @@ class GameSetting extends BaseRequest
                 'min:' . GameSettingModel::ALLOWED_MIN_PLAYERS,
                 'max:' . GameSettingModel::ALLOWED_MAX_PLAYERS,
             ],
+        ] + $this->getIsActiveRules();
+    }
+
+    /**
+     * Gets the rule for the is_active column.
+     *
+     * @return array
+     */
+    private function getIsActiveRules(): array
+    {
+        return [
             'is_active' => [
                 'required',
                 'boolean',
