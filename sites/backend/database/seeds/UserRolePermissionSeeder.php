@@ -28,8 +28,6 @@ class UserRolePermissionSeeder extends Seeder
         $superAdminRole = Role::create(['name' => Roles::ALL['super.admin']]);
         // Create admin role
         $adminRole = Role::create(['name' => Roles::ALL['admin']]);
-        // Create player role
-        Role::create(['name' => Roles::ALL['player']]);
 
         // Add permissions to the admin role
         $adminRole->givePermissionTo([
