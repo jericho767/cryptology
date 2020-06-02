@@ -43,14 +43,6 @@ class GameSetting extends BaseRequest
     private function getListRules(): array
     {
         return [
-            'sortBy' => [
-                Rule::in(GameSettingModel::SORT_BY),
-                'required_with:sort',
-            ],
-            'sort' => [
-                'required_with:sortBy',
-                Rule::in(['asc', 'desc']),
-            ],
             'filter' => [
                 'array',
             ],
@@ -118,7 +110,7 @@ class GameSetting extends BaseRequest
             'filter.created_at.end' => [
                 'date_format:' . $this->dateFormat,
             ],
-        ];
+        ] + $this->getBaseListRules(GameSettingModel::SORT_BY);
     }
 
     /**
@@ -234,26 +226,6 @@ class GameSetting extends BaseRequest
     public function getIsActive(): int
     {
         return intval($this->get('is_active'));
-    }
-
-    /**
-     * Gets the sorted property.
-     *
-     * @return null|string
-     */
-    public function getSort(): ?string
-    {
-        return $this->get('sort');
-    }
-
-    /**
-     * Gets how the property will be sorted.
-     *
-     * @return null|string
-     */
-    public function getSortBy(): ?string
-    {
-        return $this->get('sortBy');
     }
 
     /**

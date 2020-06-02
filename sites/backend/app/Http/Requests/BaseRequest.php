@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 /**
  * Class BaseRequest
@@ -19,6 +20,13 @@ class BaseRequest extends FormRequest
     protected $dateFormat = 'Y-m-d';
 
     /**
+     * Default page size.
+     *
+     * @var int
+     */
+    private const LIMIT = 10;
+
+    /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
@@ -28,6 +36,58 @@ class BaseRequest extends FormRequest
         return true;
     }
 
+    /**
+     * Gets the page size.
+     *
+     * @return int
+     */
+    public function getLimit(): int
+    {
+        return $this->get('limit') === null ? self::LIMIT : intval($this->get('limit'));
+    }
+
+    /**
+     * Gets the sorted property.
+     *
+     * @return null|string
+     */
+    public function getSort(): ?string
+    {
+        return $this->get('sort');
+    }
+
+    /**
+     * Gets how the property will be sorted.
+     *
+     * @return null|string
+     */
+    public function getSortBy(): ?string
+    {
+        return $this->get('sortBy');
+    }
+
+    /**
+     * Gets the base rules for lists.
+     *
+     * @param array $sortables
+     * @return array
+     */
+    protected function getBaseListRules(array $sortables): array
+    {
+        return [
+            'limit' => [
+                'integer',
+            ],
+            'sortBy' => [
+                Rule::in($sortables),
+                'required_with:sort',
+            ],
+            'sort' => [
+                'required_with:sortBy',
+                Rule::in(['asc', 'desc']),
+            ],
+        ];
+    }
 
     /**
      * Parses the request to Carbon.

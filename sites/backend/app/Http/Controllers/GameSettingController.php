@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\GameSetting as GameSettingRequest;
+use App\Http\Resources\GameSettingCollection;
 use App\Models\GameSetting;
 use App\Http\Resources\GameSetting as GameSettingResource;
 use App\Services\GameSettingService;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 /**
  * Class GameSettingController
@@ -30,12 +30,13 @@ class GameSettingController extends Controller
      * Display a listing of the resource.
      *
      * @param GameSettingRequest $request
-     * @return AnonymousResourceCollection
+     * @return GameSettingCollection
      */
-    public function index(GameSettingRequest $request): AnonymousResourceCollection
+    public function index(GameSettingRequest $request): GameSettingCollection
     {
-        return GameSettingResource::collection(
+        return new GameSettingCollection(
             $this->gameSettingService->all(
+                $request->getLimit(),
                 $request->getFilters(),
                 $request->getSort(),
                 $request->getSortBy()

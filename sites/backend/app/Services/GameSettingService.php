@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Models\GameSetting;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -39,12 +39,13 @@ class GameSettingService extends BaseService
     /**
      * Gets all entries of game settings base on the filters and sort
      *
+     * @param int $limit
      * @param array $filters
      * @param string|null $sort
      * @param string|null $sortBy
-     * @return Collection
+     * @return LengthAwarePaginator
      */
-    public function all(array $filters, ?string $sort, ?string $sortBy): Collection
+    public function all(int $limit, array $filters, ?string $sort, ?string $sortBy): LengthAwarePaginator
     {
         // Initialize query
         $query = GameSetting::query();
@@ -96,7 +97,7 @@ class GameSettingService extends BaseService
             $query->orderBy(GameSetting::getColumnBySortField($sortBy), $sort);
         }
 
-        return $query->get();
+        return $query->paginate($limit);
     }
 
     /**

@@ -14,7 +14,7 @@ use Illuminate\Support\Carbon;
 class BaseResource extends JsonResource
 {
     /**
-     * Outputted format of the date
+     * Outputted format of the date.
      *
      * @var string
      */
