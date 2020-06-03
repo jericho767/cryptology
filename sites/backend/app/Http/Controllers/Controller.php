@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Player;
+use Exception;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -31,5 +32,28 @@ class Controller extends BaseController
 
             return $next($request);
         });
+    }
+
+    /**
+     * Execute logic and wrapped response with code.
+     *
+     * @param callable $logic
+     * @return array
+     */
+    protected function respond(callable $logic)
+    {
+        try {
+            // Execute logic and wrap the logic's response in the data index
+            return [
+                'code' => 200,
+                'data' => $logic(),
+            ];
+        } catch (Exception $exception) {
+            // Error occurred.
+            return [
+                'code' => 500,
+                'error' => $exception->getMessage(),
+            ];
+        }
     }
 }
