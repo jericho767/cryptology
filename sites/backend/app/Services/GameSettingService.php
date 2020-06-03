@@ -48,7 +48,9 @@ class GameSettingService extends BaseService
     public function all(int $limit, array $filters, ?string $sort, ?string $sortBy): LengthAwarePaginator
     {
         // Initialize query
-        $query = GameSetting::query();
+        $query = GameSetting::with([
+            'createdBy'
+        ]);
 
         // Iterate all given filters
         foreach ($filters as $filter => $params) {
