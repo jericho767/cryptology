@@ -169,6 +169,26 @@ class GameSettingService extends BaseService
     }
 
     /**
+     * Activates a `game_settings` entry.
+     *
+     * @param GameSetting $gameSetting
+     * @return GameSetting
+     */
+    public function activate(GameSetting $gameSetting): GameSetting
+    {
+        DB::transaction(function () use ($gameSetting) {
+            // Deactivate all first
+            $this->deactivateAll();
+            // Activate
+            $gameSetting->update([
+                'is_active' => GameSetting::IS_ACTIVE,
+            ]);
+        });
+
+        return $gameSetting;
+    }
+
+    /**
      * Deactivates all existing `game_settings`.
      *
      * @return void

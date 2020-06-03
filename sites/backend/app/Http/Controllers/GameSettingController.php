@@ -118,4 +118,17 @@ class GameSettingController extends Controller
             return new GameSettingResource($this->gameSettingService->delete($gameSetting));
         });
     }
+
+    /**
+     * Activates a given game setting.
+     *
+     * @param GameSetting $gameSetting
+     * @return array
+     */
+    public function activate(GameSetting $gameSetting): array
+    {
+        return $this->respond(function () use ($gameSetting) {
+            return new GameSettingResource($this->gameSettingService->activate($gameSetting));
+        });
+    }
 }
