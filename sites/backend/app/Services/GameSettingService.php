@@ -120,7 +120,9 @@ class GameSettingService extends BaseService
                 $this->deactivateAll();
             }
 
+            /** @var GameSetting $gameSetting */
             $gameSetting = GameSetting::create($data);
+             $gameSetting->load('createdBy');
         });
 
         return $gameSetting;
