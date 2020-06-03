@@ -30,51 +30,57 @@ class GameSettingController extends Controller
      * Display a listing of the resource.
      *
      * @param GameSettingRequest $request
-     * @return GameSettingCollection
+     * @return array
      */
-    public function index(GameSettingRequest $request): GameSettingCollection
+    public function index(GameSettingRequest $request): array
     {
-        return new GameSettingCollection(
-            $this->gameSettingService->all(
-                $request->getLimit(),
-                $request->getFilters(),
-                $request->getSort(),
-                $request->getSortBy()
-            )
-        );
+        return $this->respond(function () use ($request) {
+            return new GameSettingCollection(
+                $this->gameSettingService->all(
+                    $request->getLimit(),
+                    $request->getFilters(),
+                    $request->getSort(),
+                    $request->getSortBy()
+                )
+            );
+        });
     }
 
     /**
      * Creates a new resource.
      *
      * @param GameSettingRequest $request
-     * @return GameSettingResource
+     * @return array
      */
-    public function store(GameSettingRequest $request): GameSettingResource
+    public function store(GameSettingRequest $request): array
     {
-        $data = [
-            'map_size' => $request->getMapSize(),
-            'guess_count' => $request->getGuessCount(),
-            'max_teams' => $request->getMaxTeams(),
-            'min_players' => $request->getMinPlayers(),
-            'max_players' => $request->getMaxPlayers(),
-            'is_active' => $request->getIsActive(),
-            'created_by' => $this->user->getAttribute('id'),
-        ];
+        return $this->respond(function () use ($request) {
+            $data = [
+                'map_size' => $request->getMapSize(),
+                'guess_count' => $request->getGuessCount(),
+                'max_teams' => $request->getMaxTeams(),
+                'min_players' => $request->getMinPlayers(),
+                'max_players' => $request->getMaxPlayers(),
+                'is_active' => $request->getIsActive(),
+                'created_by' => $this->user->getAttribute('id'),
+            ];
 
-        return new GameSettingResource($this->gameSettingService->create($data));
+            return new GameSettingResource($this->gameSettingService->create($data));
+        });
     }
 
     /**
      * Display the specified resource.
      *
      * @param GameSetting $gameSetting
-     * @return GameSettingResource
+     * @return array
      */
-    public function show(GameSetting $gameSetting): GameSettingResource
+    public function show(GameSetting $gameSetting): array
     {
-        $gameSetting->load('createdBy');
-        return new GameSettingResource($gameSetting);
+        return $this->respond(function () use ($gameSetting) {
+            $gameSetting->load('createdBy');
+            return new GameSettingResource($gameSetting);
+        });
     }
 
     /**
@@ -82,20 +88,22 @@ class GameSettingController extends Controller
      *
      * @param GameSettingRequest $request
      * @param GameSetting $gameSetting
-     * @return GameSettingResource
+     * @return array
      */
-    public function update(GameSettingRequest $request, GameSetting $gameSetting): GameSettingResource
+    public function update(GameSettingRequest $request, GameSetting $gameSetting): array
     {
-        $data = [
-            'map_size' => $request->getMapSize(),
-            'guess_count' => $request->getGuessCount(),
-            'max_teams' => $request->getMaxTeams(),
-            'min_players' => $request->getMinPlayers(),
-            'max_players' => $request->getMaxPlayers(),
-            'is_active' => $request->getIsActive(),
-        ];
+        return $this->respond(function () use ($request, $gameSetting) {
+            $data = [
+                'map_size' => $request->getMapSize(),
+                'guess_count' => $request->getGuessCount(),
+                'max_teams' => $request->getMaxTeams(),
+                'min_players' => $request->getMinPlayers(),
+                'max_players' => $request->getMaxPlayers(),
+                'is_active' => $request->getIsActive(),
+            ];
 
-        return new GameSettingResource($this->gameSettingService->update($data, $gameSetting));
+            return new GameSettingResource($this->gameSettingService->update($data, $gameSetting));
+        });
     }
 
     /**
