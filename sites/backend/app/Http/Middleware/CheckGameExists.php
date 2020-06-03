@@ -40,6 +40,6 @@ class CheckGameExists
             return $next($request);
         }
 
-        throw new Exception('Let me come with you, you little shit. Let\'s look for it together.');
+        throw new Exception(__('errors.game.doesNotExists'));
     }
 }

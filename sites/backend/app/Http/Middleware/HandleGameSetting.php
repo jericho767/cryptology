@@ -32,7 +32,7 @@ class HandleGameSetting
         switch ($request->route()->getName()) {
             case 'game_settings.view':
                 if (!$player->hasRole(Roles::ALL['admin'])) {
-                    throw new Exception('You just cant cunt.');
+                    throw new Exception(__('errors.permission.notAllowed'));
                 }
                 break;
             case 'game_settings.update':
@@ -41,7 +41,7 @@ class HandleGameSetting
                 $gameSettingCreator = Player::find($gameSetting->getAttribute('created_by'));
                 if ($gameSettingCreator->hasRole(Roles::ALL['super.admin'])) {
                     // Game setting is created by the all mighty, you can't touch this shit
-                    throw new Exception('You can\'t touch this shit.');
+                    throw new Exception(__('errors.permission.deny'));
                 }
         }
 

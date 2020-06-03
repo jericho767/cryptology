@@ -26,6 +26,6 @@ class CheckRequestForJson
             return $next($request);
         }
 
-        throw new Exception('I only answer to JSON requests bitch.');
+        throw new Exception(__('errors.request.jsonOnly'));
     }
 }

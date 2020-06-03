@@ -42,7 +42,7 @@ class CheckGameTeamIntegrity
 
         // Incomplete parameters
         if ($gameTeamId === null || $gameId === null) {
-            throw new Exception('Get the fuck out of here.');
+            throw new Exception(__('errors.param.incomplete'));
         }
 
         // Fetch the game the participant is in
@@ -50,12 +50,12 @@ class CheckGameTeamIntegrity
 
         // Nonexistent game
         if ($game === null) {
-            throw new Exception('What are you? Some kind of phantom player?');
+            throw new Exception(__('errors.game.doesNotExists'));
         }
 
         // Check if the game matches with the one given
         if (intval($gameId) !== $game->getAttribute('id')) {
-            throw new Exception('You lost motherfucker? Get your ass off here.');
+            throw new Exception(__('errors.param.mismatch'));
         }
 
         return $next($request);

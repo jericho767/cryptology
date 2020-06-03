@@ -50,6 +50,6 @@ class CheckGameIsRunning
             return $next($request);
         }
 
-        throw new Exception('The fuck you trying to do? It is over you idiot. You\'re late.');
+        throw new Exception(__('errors.game.notRunning'));
     }
 }
