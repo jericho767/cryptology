@@ -18,7 +18,7 @@ class BaseResourceCollection extends ResourceCollection
      * @param Request $request
      * @return Collection
      */
-    public function toArray($request)
+    public function toArray($request): Collection
     {
         return $this->collection;
     }

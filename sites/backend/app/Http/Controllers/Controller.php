@@ -40,7 +40,7 @@ class Controller extends BaseController
      * @param callable $logic
      * @return array
      */
-    protected function respond(callable $logic)
+    protected function respond(callable $logic): array
     {
         try {
             // Execute logic and wrap the logic's response in the data index
