@@ -44,5 +44,12 @@ Route::group(['middleware' => ['auth:api', 'accept.json']], function () {
                 'handle:gameSetting,gameSetting',
             ])
             ->name('update');
+
+        Route::delete('{gameSetting}', 'GameSettingController@delete')
+            ->middleware([
+                'can:' . Permissions::ALL['gameSettings.delete'],
+                'handle:gameSetting,gameSetting',
+            ])
+            ->name('delete');
     });
 });

@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\GameSetting;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\DB;
 class GameSettingService extends BaseService
 {
     /**
-     * Current game setting
+     * Current game setting.
      *
      * @var GameSetting $currentGameSetting
      */
@@ -37,7 +38,7 @@ class GameSettingService extends BaseService
     }
 
     /**
-     * Gets all entries of game settings base on the filters and sort
+     * Gets all entries of game settings base on the filters and sort.
      *
      * @param int $limit
      * @param array $filters
@@ -103,7 +104,7 @@ class GameSettingService extends BaseService
     }
 
     /**
-     * Creates a `game_settings` entry
+     * Creates a `game_settings` entry.
      *
      * @param array $data
      * @return null|GameSetting
@@ -126,7 +127,7 @@ class GameSettingService extends BaseService
     }
 
     /**
-     * Updates a `game_settings` entry
+     * Updates a `game_settings` entry.
      *
      * @param array $data
      * @param GameSetting $gameSetting
@@ -148,7 +149,25 @@ class GameSettingService extends BaseService
     }
 
     /**
-     * Deactivates all existing `game_settings`
+     * Deletes a `game_settings` entry.
+     *
+     * @param GameSetting $gameSetting
+     * @return GameSetting
+     * @throws Exception
+     */
+    public function delete(GameSetting $gameSetting): GameSetting
+    {
+        if ($gameSetting->getAttribute('is_active') === GameSetting::IS_ACTIVE) {
+            throw new Exception(__('errors.gameSetting.cannotDeleteActive'));
+        } else {
+            $gameSetting->delete();
+        }
+
+        return $gameSetting;
+    }
+
+    /**
+     * Deactivates all existing `game_settings`.
      *
      * @return void
      */
@@ -162,7 +181,7 @@ class GameSettingService extends BaseService
     }
 
     /**
-     * Gets the current map size setting
+     * Gets the current map size setting.
      *
      * @return int
      */
@@ -172,7 +191,7 @@ class GameSettingService extends BaseService
     }
 
     /**
-     * Gets the current setting for guess count
+     * Gets the current setting for guess count.
      *
      * @return int
      */
@@ -182,7 +201,7 @@ class GameSettingService extends BaseService
     }
 
     /**
-     * Gets the current setting for maximum number of teams that can participate in a game
+     * Gets the current setting for maximum number of teams that can participate in a game.
      *
      * @return int
      */
@@ -192,7 +211,7 @@ class GameSettingService extends BaseService
     }
 
     /**
-     * Gets the current setting for minimum number of players in a team in order to participate
+     * Gets the current setting for minimum number of players in a team in order to participate.
      *
      * @return int
      */
@@ -202,7 +221,7 @@ class GameSettingService extends BaseService
     }
 
     /**
-     * Gets the current setting for maximum number of players in a team in order to participate
+     * Gets the current setting for maximum number of players in a team in order to participate.
      *
      * @return int
      */

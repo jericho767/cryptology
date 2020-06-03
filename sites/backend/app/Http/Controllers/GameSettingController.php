@@ -97,4 +97,17 @@ class GameSettingController extends Controller
 
         return new GameSettingResource($this->gameSettingService->update($data, $gameSetting));
     }
+
+    /**
+     * Delete's the specified resource.
+     *
+     * @param GameSetting $gameSetting
+     * @return array
+     */
+    public function delete(GameSetting $gameSetting): array
+    {
+        return $this->respond(function () use ($gameSetting) {
+            return new GameSettingResource($this->gameSettingService->delete($gameSetting));
+        });
+    }
 }

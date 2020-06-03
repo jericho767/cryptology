@@ -27,5 +27,8 @@ return [
         'doesNotExists' => 'Let me come with you, you little shit. Let\'s look for it together.',
         'notRunning' => 'The fuck you trying to do? It is over you idiot. You\'re late.',
     ],
+    'gameSetting' => [
+        'cannotDeleteActive' => 'Cannot delete active game setting.',
+    ],
 
 ];
