@@ -41,12 +41,19 @@ class BaseRequest extends FormRequest
      * Returns a rule 'exists'.
      *
      * @param string $tableName
+     * @param bool|null $notDeleted
      * @param string $column
      * @return Exists
      */
-    protected function ruleExists(string $tableName, string $column = 'id'): Exists
+    protected function ruleExists(string $tableName, ?bool $notDeleted = true, string $column = 'id'): Exists
     {
-        return Rule::exists($tableName, $column)->whereNull('deleted_at');
+        if ($notDeleted) {
+            return Rule::exists($tableName, $column)->whereNull('deleted_at');
+        } elseif ($notDeleted === false) {
+            return Rule::exists($tableName, $column)->whereNotNull('deleted_at');
+        } else {
+            return Rule::exists($tableName, $column);
+        }
     }
 
     /**
