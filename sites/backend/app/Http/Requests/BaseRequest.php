@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Exists;
 
 /**
  * Class BaseRequest
@@ -34,6 +35,18 @@ class BaseRequest extends FormRequest
     public function authorize(): bool
     {
         return true;
+    }
+
+    /**
+     * Returns a rule 'exists'.
+     *
+     * @param string $tableName
+     * @param string $column
+     * @return Exists
+     */
+    protected function ruleExists(string $tableName, string $column = 'id'): Exists
+    {
+        return Rule::exists($tableName, $column)->whereNull('deleted_at');
     }
 
     /**

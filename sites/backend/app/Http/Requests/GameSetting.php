@@ -99,7 +99,7 @@ class GameSetting extends BaseRequest
             ],
             'filter.created_by.*' => [
                 'integer',
-                Rule::exists((new Player())->getTable(), 'id')->whereNull('deleted_at')
+                $this->ruleExists((new Player())->getTable()),
             ],
             'filter.created_at' => [
                 'array',
