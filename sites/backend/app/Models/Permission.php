@@ -43,5 +43,7 @@ class Permission
         'games.update' => 'games.update',
         'games.delete' => 'games.delete',
         'games.search' => 'games.search',
+        // Role model
+        'roles.update' => 'roles.update',
     ];
 }
