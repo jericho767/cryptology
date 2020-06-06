@@ -11,6 +11,7 @@ use App\Http\Middleware\CheckRequestForJson;
 use App\Http\Middleware\EncryptCookies;
 use App\Http\Middleware\HandleGameSetting;
 use App\Http\Middleware\HandleModel;
+use App\Http\Middleware\LoginUserAndRoleAction;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Middleware\TrimStrings;
 use App\Http\Middleware\TrustProxies;
@@ -108,6 +109,7 @@ class Kernel extends HttpKernel
         'permission' => PermissionMiddleware::class,
         'role_or_permission' => RoleOrPermissionMiddleware::class,
         'handle' => HandleModel::class,
+        'loginUserAndRoleAction' => LoginUserAndRoleAction::class,
 
         /**
          * Specific model handler middleware

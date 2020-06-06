@@ -30,5 +30,9 @@ return [
     'gameSetting' => [
         'cannotDeleteActive' => 'Cannot delete active game setting.',
     ],
+    'role' => [
+        'playerIsSuperAdmin' => 'Cannot touch an all mighty, you peasant.',
+        'ownAccount' => 'Cannot take a selfie bro. It is best that you ask someone to do the "job" for you.',
+    ],
 
 ];

@@ -23,6 +23,7 @@ class Player extends BaseResource
             'name' => $this->resource->getAttribute('name'),
             'email' => $this->resource->getAttribute('email'),
             'phone_number' => $this->resource->getAttribute('phone_number'),
+            'roles' => RoleCollection::make($this->whenLoaded('roles')),
             'email_verified_at' => $this->formatDate($this->resource->getAttribute('email_verified_at')),
             'created_at' => $this->formatDate($this->resource->getAttribute('created_at')),
             'updated_at' => $this->formatDate($this->resource->getAttribute('updated_at')),

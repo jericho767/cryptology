@@ -61,4 +61,17 @@ Route::group(['middleware' => ['auth:api', 'accept.json']], function () {
             ])
             ->name('activate');
     });
+
+    /**
+     * Roles
+     */
+    Route::group(['prefix' => 'roles', 'as' => 'roles.'], function () {
+        // Renew
+        Route::post('renew/{player}', 'RoleController@renew')
+            ->middleware([
+                'can:' . Permissions::ALL['roles.update'],
+                'loginUserAndRoleAction',
+            ])
+            ->name('renew');
+    });
 });
