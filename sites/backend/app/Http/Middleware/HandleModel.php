@@ -28,7 +28,7 @@ class HandleModel
         /** @var Player $player */
         $player = $request->user();
 
-        if ($player->hasRole(Roles::ALL['super.admin'])) {
+        if ($player->hasRole(Roles::SUPER_ADMIN)) {
             // It's the all powerful! Bypass that model handler middleware
             return $next($request);
         }

@@ -72,15 +72,12 @@ class Role extends BaseRequest
         $loggedInUser = $this->user();
 
         // Logged in user is not a super admin
-        if (!$loggedInUser->hasRole(Roles::ALL['super.admin'])) {
-            // Fetch super-admin role
-            $superAdminRole = RoleModel::query()->where('name', Roles::ALL['super.admin'])->first();
-
+        if (!$loggedInUser->hasRole(Roles::SUPER_ADMIN)) {
             // Non-super admin users cannot add super-admin roles
             $this->validate([
                 'roles.*' => [
                     Rule::notIn([
-                        $superAdminRole->getAttribute('id'),
+                        Roles::SUPER_ADMIN_ID,
                     ]),
                 ],
             ]);

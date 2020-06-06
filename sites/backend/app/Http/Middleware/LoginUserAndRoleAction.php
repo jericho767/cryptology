@@ -31,9 +31,9 @@ class LoginUserAndRoleAction
         $loggedInUser = $request->user();
 
         // Player being handled is a super admin
-        if ($player->hasRole(Roles::ALL['super.admin'])) {
+        if ($player->hasRole(Roles::SUPER_ADMIN)) {
             // Logged in user is not a super admin
-            if (!$loggedInUser->hasRole(Roles::ALL['super.admin'])) {
+            if (!$loggedInUser->hasRole(Roles::SUPER_ADMIN)) {
                 throw new Exception(__('errors.role.playerIsSuperAdmin'));
             }
         }

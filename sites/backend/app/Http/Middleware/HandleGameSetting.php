@@ -32,7 +32,7 @@ class HandleGameSetting
                 /** @var Player $gameSettingCreator */
                 $gameSettingCreator = Player::find($gameSetting->getAttribute('created_by'));
 
-                if ($gameSettingCreator->hasRole(Roles::ALL['super.admin'])) {
+                if ($gameSettingCreator->hasRole(Roles::SUPER_ADMIN)) {
                     // Game setting is created by the all mighty, you can't touch this shit
                     throw new Exception(__('errors.permission.deny'));
                 }

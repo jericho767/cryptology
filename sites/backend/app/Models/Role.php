@@ -11,14 +11,8 @@ namespace App\Models;
 class Role
 {
     /**
-     * List of all roles
-     *
-     * @var array
+     * The all mighty.
      */
-    const ALL = [
-        // Role identifier for Super administrator accounts
-        'super.admin' => 'super-admin',
-        // Role identifier for administrator accounts
-        'admin' => 'admin',
-    ];
+    const SUPER_ADMIN = 'super-admin';
+    const SUPER_ADMIN_ID = 1;
 }
