@@ -26,19 +26,12 @@ class HandleGameSetting
      */
     public function handle(Request $request, Closure $next, GameSetting $gameSetting)
     {
-        /** @var Player $player */
-        $player = $request->user();
-
         switch ($request->route()->getName()) {
-            case 'game_settings.view':
-                if (!$player->hasRole(Roles::ALL['admin'])) {
-                    throw new Exception(__('errors.permission.notAllowed'));
-                }
-                break;
             case 'game_settings.update':
             case 'game_settings.delete':
                 /** @var Player $gameSettingCreator */
                 $gameSettingCreator = Player::find($gameSetting->getAttribute('created_by'));
+
                 if ($gameSettingCreator->hasRole(Roles::ALL['super.admin'])) {
                     // Game setting is created by the all mighty, you can't touch this shit
                     throw new Exception(__('errors.permission.deny'));
