@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use App\Models\Player;
+use App\Models\Role as Roles;
+use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Role as RoleModel;
 
 /**
@@ -51,5 +53,37 @@ class Role extends BaseRequest
         $player = $this->route('player');
 
         return $player;
+    }
+
+    /**
+     * Interceptor after validations are passed.
+     */
+    protected function passedValidation(): void
+    {
+        $this->canAddSuperAdminRole();
+    }
+
+    /**
+     * Checks if the logged in user can add a super-admin role.
+     */
+    private function canAddSuperAdminRole()
+    {
+        /** @var Player */
+        $loggedInUser = $this->user();
+
+        // Logged in user is not a super admin
+        if (!$loggedInUser->hasRole(Roles::ALL['super.admin'])) {
+            // Fetch super-admin role
+            $superAdminRole = RoleModel::query()->where('name', Roles::ALL['super.admin'])->first();
+
+            // Non-super admin users cannot add super-admin roles
+            $this->validate([
+                'roles.*' => [
+                    Rule::notIn([
+                        $superAdminRole->getAttribute('id'),
+                    ]),
+                ],
+            ]);
+        }
     }
 }
