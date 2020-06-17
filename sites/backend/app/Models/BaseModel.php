@@ -14,6 +14,38 @@ class BaseModel extends Model
     use SoftDeletes;
 
     /**
+     * Gets the column to be filtered base on the filter field value.
+     *
+     * @param string $filterField
+     * @return string
+     */
+    public static function getColumnByFilterField(string $filterField): string
+    {
+        return collect(get_called_class()::FILTER_BY)
+            ->filter(function ($field) use ($filterField) {
+                return $field === $filterField;
+            })
+            ->keys()
+            ->first();
+    }
+
+    /**
+     * Gets the column to be sorted base on the sort field value.
+     *
+     * @param string $sortField
+     * @return string
+     */
+    public static function getColumnBySortField(string $sortField): string
+    {
+        return collect(get_called_class()::SORT_BY)
+            ->filter(function ($field) use ($sortField) {
+                return $field === $sortField;
+            })
+            ->keys()
+            ->first();
+    }
+
+    /**
      * Save the model to the database.
      *
      * @param  array  $options
