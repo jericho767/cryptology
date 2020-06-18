@@ -77,6 +77,9 @@ class GameSettingService extends BaseService
         // Apply sorting
         if ($sort !== null && $sortBy !== null) {
             $query->orderBy(GameSetting::getColumnBySortField($sortBy), $sort);
+        } else {
+            // Default sorting
+            $query->orderByDesc('id');
         }
 
         return $query->paginate($limit);
