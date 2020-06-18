@@ -90,13 +90,13 @@ class BaseModel extends Model
      *
      * @param Builder $query
      * @param string|null $column
-     * @param string|null $by
+     * @param string|null $sort
      */
-    public function scopeSort(Builder $query, ?string $column, ?string $by): void
+    public function scopeSort(Builder $query, ?string $column, ?string $sort): void
     {
         // Apply sorting
-        if ($column !== null && $by !== null) {
-            $query->orderBy($column, $by);
+        if ($column !== null && $sort !== null) {
+            $query->orderBy($column, $sort);
         } else {
             // Default sorting
             $query->orderByDesc('id');
