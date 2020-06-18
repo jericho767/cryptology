@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
@@ -119,5 +120,19 @@ class GameSetting extends BaseModel
     public function createdBy(): BelongsTo
     {
         return $this->belongsTo(Player::class, 'created_by', 'id');
+    }
+
+    /**
+     * SCOPE to sort by created_by column.
+     *
+     * @param Builder $query
+     * @param string $sort
+     */
+    public function scopeSortByCreatedBy(Builder $query, string $sort): void
+    {
+        $playersTableName = (new Player())->getTable();
+
+        $query->join($playersTableName, 'created_by', $playersTableName . '.id')
+            ->orderBy($playersTableName . '.name', $sort);
     }
 }

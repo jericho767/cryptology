@@ -49,7 +49,7 @@ class GameSettingService extends BaseService
     {
         // Initialize query
         $query = GameSetting::with([
-            'createdBy'
+            'createdBy',
         ]);
 
         // Iterate all given filters
@@ -75,7 +75,11 @@ class GameSettingService extends BaseService
         }
 
         // Apply sorting
-        $query->sort(GameSetting::getColumnBySortField($sortBy), $sort);
+        if ($sortBy === GameSetting::SORT_BY['created_by'] && $sort !== null) {
+            $query->sortByCreatedBy($sort);
+        } else {
+            $query->sort(GameSetting::getColumnBySortField($sortBy), $sort);
+        }
 
         return $query->paginate($limit);
     }
