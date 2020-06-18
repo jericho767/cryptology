@@ -18,11 +18,15 @@ class BaseModel extends Model
     /**
      * Gets the column to be filtered base on the filter field value.
      *
-     * @param string $filterField
+     * @param string|null $filterField
      * @return string
      */
-    public static function getColumnByFilterField(string $filterField): string
+    public static function getColumnByFilterField(?string $filterField): ?string
     {
+        if ($filterField === null) {
+            return null;
+        }
+
         return collect(get_called_class()::FILTER_BY)
             ->filter(function ($field) use ($filterField) {
                 return $field === $filterField;
@@ -34,11 +38,15 @@ class BaseModel extends Model
     /**
      * Gets the column to be sorted base on the sort field value.
      *
-     * @param string $sortField
+     * @param string|null $sortField
      * @return string
      */
-    public static function getColumnBySortField(string $sortField): string
+    public static function getColumnBySortField(?string $sortField): ?string
     {
+        if ($sortField === null) {
+            return null;
+        }
+
         return collect(get_called_class()::SORT_BY)
             ->filter(function ($field) use ($sortField) {
                 return $field === $sortField;
@@ -74,6 +82,24 @@ class BaseModel extends Model
             } else {
                 $query->where($column, '>=', $start);
             }
+        }
+    }
+
+    /**
+     * Sorting.
+     *
+     * @param Builder $query
+     * @param string|null $column
+     * @param string|null $by
+     */
+    public function scopeSort(Builder $query, ?string $column, ?string $by): void
+    {
+        // Apply sorting
+        if ($column !== null && $by !== null) {
+            $query->orderBy($column, $by);
+        } else {
+            // Default sorting
+            $query->orderByDesc('id');
         }
     }
 
