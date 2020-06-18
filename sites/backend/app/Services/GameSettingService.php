@@ -71,27 +71,7 @@ class GameSettingService extends BaseService
                 case 'min_players':
                 case 'max_players':
                 case 'created_at':
-                    $start = $params['start'];
-                    $end = $params['end'];
-
-                    if ($start !== null && $end !== null) {
-                        // Both start and end are set, use between clause
-                        $query->whereBetween($column, [$start, $end]);
-                    } elseif ($start === null && $end !== null) {
-                        // Only the end part is set
-                        if ($end instanceof Carbon) {
-                            $query->whereDate($column, '<=', $end);
-                        } else {
-                            $query->where($column, '<=', $end);
-                        }
-                    } elseif ($start !== null && $end === null) {
-                        // Only the start part is set
-                        if ($start instanceof Carbon) {
-                            $query->whereDate($column, '>=', $start);
-                        } else {
-                            $query->where($column, '>=', $start);
-                        }
-                    }
+                    $query->between($column, $params['start'], $params['end']);
             }
         }
 

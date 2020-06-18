@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -43,6 +45,36 @@ class BaseModel extends Model
             })
             ->keys()
             ->first();
+    }
+
+    /**
+     * Scope for adding where clause for in between filters.
+     *
+     * @param Builder $query
+     * @param string $column
+     * @param Carbon|int $start
+     * @param Carbon|int $end
+     */
+    public function scopeBetween(Builder $query, string $column, $start, $end): void
+    {
+        if ($start !== null && $end !== null) {
+            // Both start and end are set, use between clause
+            $query->whereBetween($column, [$start, $end]);
+        } elseif ($start === null && $end !== null) {
+            // Only the end part is set
+            if ($end instanceof Carbon) {
+                $query->whereDate($column, '<=', $end);
+            } else {
+                $query->where($column, '<=', $end);
+            }
+        } elseif ($start !== null && $end === null) {
+            // Only the start part is set
+            if ($start instanceof Carbon) {
+                $query->whereDate($column, '>=', $start);
+            } else {
+                $query->where($column, '>=', $start);
+            }
+        }
     }
 
     /**
