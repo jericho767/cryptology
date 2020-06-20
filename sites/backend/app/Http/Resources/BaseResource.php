@@ -18,16 +18,16 @@ class BaseResource extends JsonResource
      *
      * @var string
      */
-    private const DATE_FORMAT = 'Y-m-d';
+    protected const DATE_FORMAT = 'Y-m-d';
 
     /**
      * Formats a given date.
      *
-     * @param Carbon $date
+     * @param Carbon|null $date
      * @param string $format
      * @return string
      */
-    protected function formatDate(Carbon $date = null, string $format = self::DATE_FORMAT): string
+    protected function formatDate(?Carbon $date, string $format = self::DATE_FORMAT): string
     {
         if ($date === null) {
             return '';

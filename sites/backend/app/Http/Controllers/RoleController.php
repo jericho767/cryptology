@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Role as RoleRequest;
 use App\Http\Resources\Player;
+use App\Http\Resources\RoleCollection;
 use App\Services\RoleService;
 
 /**
@@ -22,6 +23,24 @@ class RoleController extends Controller
     {
         parent::__construct();
         $this->roleService = $roleService;
+    }
+
+    /**
+     * List of roles.
+     *
+     * @param RoleRequest $request
+     * @return array
+     */
+    public function index(RoleRequest $request): array
+    {
+        return $this->respond(function () use ($request) {
+            return new RoleCollection($this->roleService->all(
+                $request->getLimit(),
+                $request->getFilters(),
+                $request->getSort(),
+                $request->getSortBy()
+            ));
+        });
     }
 
     /**

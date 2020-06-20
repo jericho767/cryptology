@@ -45,5 +45,6 @@ class Permission
         'games.search' => 'games.search',
         // Role model
         'roles.update' => 'roles.update',
+        'roles.list' => 'roles.list',
     ];
 }

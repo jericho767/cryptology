@@ -66,6 +66,13 @@ Route::group(['middleware' => ['auth:api', 'accept.json']], function () {
      * Roles
      */
     Route::group(['prefix' => 'roles', 'as' => 'roles.'], function () {
+        // List
+        Route::get('', 'RoleController@index')
+            ->middleware([
+                'can:' . Permissions::ALL['roles.list']
+            ])
+            ->name('index');
+
         // Renew
         Route::post('renew/{player}', 'RoleController@renew')
             ->middleware([

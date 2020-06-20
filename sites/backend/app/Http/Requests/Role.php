@@ -20,6 +20,23 @@ class Role extends BaseRequest
      */
     public function rules(): array
     {
+        switch ($this->route()->getName()) {
+            case 'roles.index':
+                return $this->getListRules();
+            case 'roles.renew':
+                return $this->getRenewRules();
+            default:
+                return [];
+        }
+    }
+
+    /**
+     * Gets the rules applied for renew roles route.
+     *
+     * @return array
+     */
+    private function getRenewRules(): array
+    {
         return [
             'roles' => [
                 'array',
@@ -30,6 +47,56 @@ class Role extends BaseRequest
                 $this->ruleExists((new RoleModel())->getTable(), null),
             ]
         ];
+    }
+
+    /**
+     * Gets the filters.
+     *
+     * @return array
+     */
+    public function getFilters(): array
+    {
+        $filters = $this->get('filter');
+
+        return [
+            Roles::FILTER_BY['name'] => isset($filters[Roles::FILTER_BY['name']]) ?
+                $filters[Roles::FILTER_BY['name']] : null,
+            Roles::FILTER_BY['created_at'] => [
+                'start' => isset($filters[Roles::FILTER_BY['created_at']]['start']) ?
+                    $this->toDate($filters[Roles::FILTER_BY['created_at']]['start'], true) : null,
+                'end' => isset($filters[Roles::FILTER_BY['created_at']]['end']) ?
+                    $this->toDate($filters[Roles::FILTER_BY['created_at']]['end'], false) : null,
+            ],
+        ];
+    }
+
+    /**
+     * Gets the rules for the list route.
+     *
+     * @return array
+     */
+    private function getListRules(): array
+    {
+        return [
+            'filter' => [
+                'array',
+            ],
+            'filter.*' => [
+                Rule::in(Roles::FILTER_BY),
+            ],
+            'filter.' . Roles::FILTER_BY['name'] => [
+                'min:1',
+            ],
+            'filter.' . Roles::FILTER_BY['created_at'] => [
+                'array',
+            ],
+            'filter.' . Roles::FILTER_BY['created_at'] . '.start' => [
+                'date_format:' . $this->dateFormat,
+            ],
+            'filter.' . Roles::FILTER_BY['created_at'] . '.end' => [
+                'date_format:' . $this->dateFormat,
+            ],
+        ] + $this->getBaseListRules(Roles::SORT_BY);
     }
 
     /**
