@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\Player;
-use App\Models\Role as Roles;
+use App\Models\Role;
 use Closure;
 use Exception;
 use Illuminate\Http\Request;
@@ -31,9 +31,9 @@ class LoginUserAndRoleAction
         $loggedInUser = $request->user();
 
         // Player being handled is a super admin
-        if ($player->hasRole(Roles::SUPER_ADMIN)) {
+        if ($player->hasRole(Role::SUPER_ADMIN)) {
             // Logged in user is not a super admin
-            if (!$loggedInUser->hasRole(Roles::SUPER_ADMIN)) {
+            if (!$loggedInUser->hasRole(Role::SUPER_ADMIN)) {
                 throw new Exception(__('errors.role.playerIsSuperAdmin'));
             }
         }

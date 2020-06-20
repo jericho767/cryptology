@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Models\GameSetting;
 use App\Models\Player;
-use App\Models\Role as Roles;
+use App\Models\Role;
 use Closure;
 use Exception;
 use Illuminate\Http\Request;
@@ -32,7 +32,7 @@ class HandleGameSetting
                 /** @var Player $gameSettingCreator */
                 $gameSettingCreator = Player::find($gameSetting->getAttribute('created_by'));
 
-                if ($gameSettingCreator->hasRole(Roles::SUPER_ADMIN)) {
+                if ($gameSettingCreator->hasRole(Role::SUPER_ADMIN)) {
                     // Game setting is created by the all mighty, you can't touch this shit
                     throw new Exception(__('errors.permission.deny'));
                 }

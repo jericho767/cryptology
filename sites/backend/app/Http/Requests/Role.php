@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use App\Models\Player;
-use App\Models\Role as Roles;
+use App\Models\Role as RoleModel;
 use Illuminate\Validation\Rule;
-use Spatie\Permission\Models\Role as RoleModel;
 
 /**
  * Class Role
@@ -59,13 +58,13 @@ class Role extends BaseRequest
         $filters = $this->get('filter');
 
         return [
-            Roles::FILTER_BY['name'] => isset($filters[Roles::FILTER_BY['name']]) ?
-                $filters[Roles::FILTER_BY['name']] : null,
-            Roles::FILTER_BY['created_at'] => [
-                'start' => isset($filters[Roles::FILTER_BY['created_at']]['start']) ?
-                    $this->toDate($filters[Roles::FILTER_BY['created_at']]['start'], true) : null,
-                'end' => isset($filters[Roles::FILTER_BY['created_at']]['end']) ?
-                    $this->toDate($filters[Roles::FILTER_BY['created_at']]['end'], false) : null,
+            RoleModel::FILTER_BY['name'] => isset($filters[RoleModel::FILTER_BY['name']]) ?
+                $filters[RoleModel::FILTER_BY['name']] : null,
+            RoleModel::FILTER_BY['created_at'] => [
+                'start' => isset($filters[RoleModel::FILTER_BY['created_at']]['start']) ?
+                    $this->toDate($filters[RoleModel::FILTER_BY['created_at']]['start'], true) : null,
+                'end' => isset($filters[RoleModel::FILTER_BY['created_at']]['end']) ?
+                    $this->toDate($filters[RoleModel::FILTER_BY['created_at']]['end'], false) : null,
             ],
         ];
     }
@@ -82,21 +81,21 @@ class Role extends BaseRequest
                 'array',
             ],
             'filter.*' => [
-                Rule::in(Roles::FILTER_BY),
+                Rule::in(RoleModel::FILTER_BY),
             ],
-            'filter.' . Roles::FILTER_BY['name'] => [
+            'filter.' . RoleModel::FILTER_BY['name'] => [
                 'min:1',
             ],
-            'filter.' . Roles::FILTER_BY['created_at'] => [
+            'filter.' . RoleModel::FILTER_BY['created_at'] => [
                 'array',
             ],
-            'filter.' . Roles::FILTER_BY['created_at'] . '.start' => [
+            'filter.' . RoleModel::FILTER_BY['created_at'] . '.start' => [
                 'date_format:' . $this->dateFormat,
             ],
-            'filter.' . Roles::FILTER_BY['created_at'] . '.end' => [
+            'filter.' . RoleModel::FILTER_BY['created_at'] . '.end' => [
                 'date_format:' . $this->dateFormat,
             ],
-        ] + $this->getBaseListRules(Roles::SORT_BY);
+        ] + $this->getBaseListRules(RoleModel::SORT_BY);
     }
 
     /**
@@ -139,12 +138,12 @@ class Role extends BaseRequest
         $loggedInUser = $this->user();
 
         // Logged in user is not a super admin
-        if (!$loggedInUser->hasRole(Roles::SUPER_ADMIN)) {
+        if (!$loggedInUser->hasRole(RoleModel::SUPER_ADMIN)) {
             // Non-super admin users cannot add super-admin roles
             $this->validate([
                 'roles.*' => [
                     Rule::notIn([
-                        Roles::SUPER_ADMIN_ID,
+                        RoleModel::SUPER_ADMIN_ID,
                     ]),
                 ],
             ]);

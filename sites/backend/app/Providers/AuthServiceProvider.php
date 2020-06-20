@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Player;
-use App\Models\Role as Roles;
+use App\Models\Role;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Passport\Passport;
@@ -35,7 +35,7 @@ class AuthServiceProvider extends ServiceProvider
         // Implicitly grant "Super Admin" role all permissions
         // This works in the app by using gate-related functions like auth()->user->can() and @can()
         Gate::before(function (Player $user): bool {
-            return $user->hasRole(Roles::SUPER_ADMIN);
+            return $user->hasRole(Role::SUPER_ADMIN);
         });
     }
 }

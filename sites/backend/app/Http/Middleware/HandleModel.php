@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Http\Kernel;
 use App\Models\Player;
-use App\Models\Role as Roles;
+use App\Models\Role;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -28,7 +28,7 @@ class HandleModel
         /** @var Player $player */
         $player = $request->user();
 
-        if ($player->hasRole(Roles::SUPER_ADMIN)) {
+        if ($player->hasRole(Role::SUPER_ADMIN)) {
             // It's the all powerful! Bypass that model handler middleware
             return $next($request);
         }
