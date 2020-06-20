@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Schema;
 
 /**
  * Class GameSetting
@@ -132,7 +133,23 @@ class GameSetting extends BaseModel
     {
         $playersTableName = (new Player())->getTable();
 
-        $query->join($playersTableName, 'created_by', $playersTableName . '.id')
-            ->orderBy($playersTableName . '.name', $sort);
+        /*
+         * Setup columns to be fetched since the GameSetting.id
+         * will be overwritten by the Player.id column
+         */
+        $columns = collect(Schema::getColumnListing($this->table))
+            // Prefix all columns with the GameSetting table
+            ->transform(function ($column) {
+                return $this->table . '.' . $column;
+            });
+
+        $query->join(
+            $playersTableName,
+            'created_by',
+            '=',
+            $playersTableName . '.id'
+        )
+        ->select($columns->toArray())
+        ->orderBy($playersTableName . '.name', $sort);
     }
 }
