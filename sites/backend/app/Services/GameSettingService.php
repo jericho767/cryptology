@@ -58,18 +58,18 @@ class GameSettingService extends BaseService
             $column = GameSetting::getColumnByFilterField($filter);
 
             // This is where the filtering happens, it's self-explanatory
-            switch ($column) {
-                case 'created_by':
+            switch ($filter) {
+                case GameSetting::FILTER_BY['created_by']:
                     if ($params !== null && is_array($params)) {
                         $query->whereIn($column, $params);
                     }
                     break;
-                case 'map_size':
-                case 'guess_count':
-                case 'max_teams':
-                case 'min_players':
-                case 'max_players':
-                case 'created_at':
+                case GameSetting::FILTER_BY['map_size']:
+                case GameSetting::FILTER_BY['guess_count']:
+                case GameSetting::FILTER_BY['max_teams']:
+                case GameSetting::FILTER_BY['min_players']:
+                case GameSetting::FILTER_BY['max_players']:
+                case GameSetting::FILTER_BY['created_at']:
                     $query->between($column, $params['start'], $params['end']);
             }
         }
