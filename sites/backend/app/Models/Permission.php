@@ -11,7 +11,11 @@ use Spatie\Permission\Models\Permission as SpatiePermission;
 class Permission extends SpatiePermission
 {
     /**
-     * List of permissions
+     * List of permissions.
+     * Once updated don't forget to run:
+     *      php artisan permissions:update
+     *
+     * To reflect changes to the database.
      *
      * @var array
      */

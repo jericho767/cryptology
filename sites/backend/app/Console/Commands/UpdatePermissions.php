@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Permission;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
-use Spatie\Permission\Exceptions\PermissionDoesNotExist;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class UpdatePermissions
@@ -44,27 +44,97 @@ class UpdatePermissions extends Command
      */
     public function handle()
     {
-        $created = 0;
+        $flushFlag = false;
 
-        foreach (Permission::ALL as $permission) {
-            try {
-                // Try to find the permission by name.
-                Permission::findByName($permission);
-            } catch (PermissionDoesNotExist $exception) {
-                // Permission does not exist and should be created
-                Permission::create([
-                    'name' => $permission
-                ]);
+        $createdPermissions = $this->createPermissions();
+        $deletedPermissions = $this->deletePermissions();
 
-                $created++;
-            }
+        if (count($createdPermissions) > 0) {
+            $flushFlag = true;
+            echo "++++++++++++++++++++++++++\n";
+            echo "CREATED PERMISSIONS\n";
+            echo "++++++++++++++++++++++++++\n";
+            echo implode("\n", $createdPermissions) . "\n";
+            echo "++++++++++++++++++++++++++\n";
+            echo count($createdPermissions) . " permission(s) created.\n";
+            echo "++++++++++++++++++++++++++\n";
         }
 
-        if ($created > 0) {
+        if (count($deletedPermissions) > 0) {
+            $flushFlag = true;
+            echo "--------------------------\n";
+            echo "DELETED PERMISSIONS\n";
+            echo "--------------------------\n";
+            echo implode("\n", $deletedPermissions) . "\n";
+            echo "--------------------------\n";
+            echo count($deletedPermissions) . " permission(s) deleted.\n";
+            echo "--------------------------\n";
+        }
+
+        if ($flushFlag) {
             Artisan::call('permission:cache-reset');
+        } else {
+            echo "All permissions are up-to-date.\n";
         }
 
-        echo $created . ' permission(s) created.' . "\n";
         return;
+    }
+
+    /**
+     * Deletes permissions from the database that does not exists in the array.
+     *
+     * @return array
+     */
+    private function deletePermissions(): array
+    {
+        $deleted = [];
+
+        DB::transaction(function () use (&$deleted) {
+            Permission::all()
+                ->filter(function (Permission $permission) {
+                    // Filter database permissions that are not in the array.
+                    return !in_array(
+                        $permission->getAttribute('name'),
+                        Permission::ALL,
+                        true
+                    );
+                })
+                ->each(function (Permission $permission) use (&$deleted) {
+                    // Push the deleted permission to the deleted array.
+                    $deleted[] = $permission->getAttribute('name');
+
+                    // Delete the permission
+                    $permission->delete();
+                });
+        });
+
+        return $deleted;
+    }
+
+    /**
+     * Creates the permissions newly added in the array.
+     *
+     * @return array
+     */
+    private function createPermissions(): array
+    {
+        $created = [];
+
+        DB::transaction(function () use (&$created) {
+            collect(Permission::ALL)
+                // Make a collection of permissions that are not in the database
+                ->diff(Permission::all()->pluck('name'))
+                ->each(function (string $permission) use (&$created) {
+                    // Add the permission to the created array
+                    $created[] = $permission;
+
+                    // Create the permission
+                    Permission::create([
+                        'name' => $permission
+                    ]);
+                });
+        });
+
+        return $created;
     }
 }
