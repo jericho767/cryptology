@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Permission as Permissions;
+use App\Models\Permission;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,26 +21,26 @@ Route::group(['middleware' => ['auth:api', 'accept.json']], function () {
     Route::group(['prefix' => 'game-settings', 'as' => 'game_settings.'], function () {
         // Create
         Route::post('', 'GameSettingController@store')
-            ->middleware('can:' . Permissions::ALL['gameSettings.create'])
+            ->middleware('can:' . Permission::ALL['gameSettings.create'])
             ->name('create');
 
         // View
         Route::get('{gameSetting}', 'GameSettingController@show')
             ->middleware([
-                'can:' . Permissions::ALL['gameSettings.read'],
+                'can:' . Permission::ALL['gameSettings.read'],
                 'handle:gameSetting,gameSetting',
             ])
             ->name('view');
 
         // List
         Route::get('', 'GameSettingController@index')
-            ->middleware('can:' . Permissions::ALL['gameSettings.read'])
+            ->middleware('can:' . Permission::ALL['gameSettings.read'])
             ->name('index');
 
         // Update
         Route::put('{gameSetting}', 'GameSettingController@update')
             ->middleware([
-                'can:' . Permissions::ALL['gameSettings.update'],
+                'can:' . Permission::ALL['gameSettings.update'],
                 'handle:gameSetting,gameSetting',
             ])
             ->name('update');
@@ -48,7 +48,7 @@ Route::group(['middleware' => ['auth:api', 'accept.json']], function () {
         // Delete
         Route::delete('{gameSetting}', 'GameSettingController@delete')
             ->middleware([
-                'can:' . Permissions::ALL['gameSettings.delete'],
+                'can:' . Permission::ALL['gameSettings.delete'],
                 'handle:gameSetting,gameSetting',
             ])
             ->name('delete');
@@ -56,7 +56,7 @@ Route::group(['middleware' => ['auth:api', 'accept.json']], function () {
         // Activate game setting
         Route::post('activate/{gameSetting}', 'GameSettingController@activate')
             ->middleware([
-                'can:' . Permissions::ALL['gameSettings.activate'],
+                'can:' . Permission::ALL['gameSettings.activate'],
                 'handle:gameSetting,gameSetting',
             ])
             ->name('activate');
@@ -69,14 +69,14 @@ Route::group(['middleware' => ['auth:api', 'accept.json']], function () {
         // List
         Route::get('', 'RoleController@index')
             ->middleware([
-                'can:' . Permissions::ALL['roles.list']
+                'can:' . Permission::ALL['roles.list']
             ])
             ->name('index');
 
         // Renew
         Route::post('renew/{player}', 'RoleController@renew')
             ->middleware([
-                'can:' . Permissions::ALL['roles.update'],
+                'can:' . Permission::ALL['roles.update'],
                 'loginUserAndRoleAction',
             ])
             ->name('renew');
@@ -84,7 +84,7 @@ Route::group(['middleware' => ['auth:api', 'accept.json']], function () {
         // Create
         Route::post('create', 'RoleController@store')
             ->middleware([
-                'can:' . Permissions::ALL['roles.create'],
+                'can:' . Permission::ALL['roles.create'],
             ])
             ->name('create');
     });
