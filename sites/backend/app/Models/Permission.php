@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
+use Spatie\Permission\Models\Permission as SpatiePermission;
+
 /**
- * This class only holds the constant permissions in `permissions` table.
- * For the actual Permission model, it is implemented by a package.
- *
+ * Class Permission
  * @package App\Models
  */
-class Permission
+class Permission extends SpatiePermission
 {
     /**
      * List of permissions

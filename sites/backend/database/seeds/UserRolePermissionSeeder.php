@@ -1,9 +1,8 @@
 <?php
 
-use App\Models\Permission as Permissions;
+use App\Models\Permission;
 use App\Models\Player;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Permission;
 use App\Models\Role;
 
 /**
@@ -19,7 +18,7 @@ class UserRolePermissionSeeder extends Seeder
     public function run()
     {
         // Create permissions
-        foreach (Permissions::ALL as $permission) {
+        foreach (Permission::ALL as $permission) {
             Permission::create(['name' => $permission]);
         }
 
@@ -30,14 +29,14 @@ class UserRolePermissionSeeder extends Seeder
 
         // Add permissions to the admin role
         $adminRole->givePermissionTo([
-            Permissions::ALL['words.create'],
-            Permissions::ALL['words.read'],
-            Permissions::ALL['words.search'],
-            Permissions::ALL['gameSettings.read'],
-            Permissions::ALL['players.read'],
-            Permissions::ALL['players.search'],
-            Permissions::ALL['games.read'],
-            Permissions::ALL['games.search'],
+            Permission::ALL['words.create'],
+            Permission::ALL['words.read'],
+            Permission::ALL['words.search'],
+            Permission::ALL['gameSettings.read'],
+            Permission::ALL['players.read'],
+            Permission::ALL['players.search'],
+            Permission::ALL['games.read'],
+            Permission::ALL['games.search'],
         ]);
 
         // Assign roles to users

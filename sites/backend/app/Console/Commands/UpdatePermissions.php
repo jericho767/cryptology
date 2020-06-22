@@ -2,11 +2,10 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Permission as Permissions;
+use App\Models\Permission;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 use Spatie\Permission\Exceptions\PermissionDoesNotExist;
-use Spatie\Permission\Models\Permission;
 
 /**
  * Class UpdatePermissions
@@ -47,7 +46,7 @@ class UpdatePermissions extends Command
     {
         $created = 0;
 
-        foreach (Permissions::ALL as $permission) {
+        foreach (Permission::ALL as $permission) {
             try {
                 // Try to find the permission by name.
                 Permission::findByName($permission);
