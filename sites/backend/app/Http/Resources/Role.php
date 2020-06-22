@@ -21,6 +21,7 @@ class Role extends BaseResource
         return [
             'id' => $this->resource->getAttribute('id'),
             'name' => $this->resource->getAttribute('name'),
+            'permissions' => new PermissionCollection($this->whenLoaded('permissions')),
             'created_at' => $this->formatDate($this->resource->getAttribute('created_at')),
         ];
     }

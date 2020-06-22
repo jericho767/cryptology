@@ -46,5 +46,6 @@ class Permission
         // Role model
         'roles.update' => 'roles.update',
         'roles.list' => 'roles.list',
+        'roles.create' => 'roles.create',
     ];
 }

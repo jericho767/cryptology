@@ -44,4 +44,18 @@ class Role extends SpatieRole
         'name' => 'name',
         'created_at' => 'created_at',
     ];
+
+    /**
+     * Minimum number of characters for the name.
+     *
+     * @var int
+     */
+    const NAME_MIN_LENGTH = 5;
+
+    /**
+     * Maximum number of characters for the name.
+     *
+     * @var int
+     */
+    const NAME_MAX_LENGTH = 20;
 }

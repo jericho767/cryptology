@@ -63,4 +63,20 @@ class RoleService extends BaseService
 
         return $roles->paginate($limit);
     }
+
+    /**
+     * Creates a role.
+     *
+     * @param string $name
+     * @param array $permissions
+     * @return Role
+     */
+    public function create(string $name, array $permissions): Role
+    {
+        return Role::create([
+            'name' => $name,
+        ])
+        ->load('permissions')
+        ->givePermissionTo($permissions);
+    }
 }

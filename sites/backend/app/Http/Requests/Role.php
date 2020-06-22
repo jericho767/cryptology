@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Permission;
 use App\Models\Player;
 use App\Models\Role as RoleModel;
 use Illuminate\Validation\Rule;
@@ -24,9 +25,56 @@ class Role extends BaseRequest
                 return $this->getListRules();
             case 'roles.renew':
                 return $this->getRenewRules();
+            case 'roles.create':
+                return $this->getCreateRules();
             default:
                 return [];
         }
+    }
+
+    /**
+     * Gets the rules applied in creating a role.
+     *
+     * @return array
+     */
+    private function getCreateRules(): array
+    {
+        return [
+            'name' => [
+                'required',
+                'min: ' . RoleModel::NAME_MIN_LENGTH,
+                'max: ' . RoleModel::NAME_MAX_LENGTH,
+                'unique:' . (new RoleModel())->getTable() . ',name',
+            ],
+            'permissions' => [
+                'array',
+                'required',
+            ],
+            'permissions.*' => [
+                Rule::in(Permission::ALL),
+                'distinct',
+            ],
+        ];
+    }
+
+    /**
+     * Gets the permissions parameter.
+     *
+     * @return array
+     */
+    public function getPermissions(): array
+    {
+        return $this->get('permissions');
+    }
+
+    /**
+     * Gets the name parameter.
+     *
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->get('name');
     }
 
     /**

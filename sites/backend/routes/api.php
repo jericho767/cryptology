@@ -80,5 +80,12 @@ Route::group(['middleware' => ['auth:api', 'accept.json']], function () {
                 'loginUserAndRoleAction',
             ])
             ->name('renew');
+
+        // Create
+        Route::post('create', 'RoleController@store')
+            ->middleware([
+                'can:' . Permissions::ALL['roles.create'],
+            ])
+            ->name('create');
     });
 });
