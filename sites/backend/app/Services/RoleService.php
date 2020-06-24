@@ -5,6 +5,8 @@ namespace App\Services;
 use App\Models\Player;
 use App\Models\Role;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class RoleService
@@ -73,10 +75,48 @@ class RoleService extends BaseService
      */
     public function create(string $name, array $permissions): Role
     {
-        return Role::create([
-            'name' => $name,
-        ])
-        ->load('permissions')
-        ->givePermissionTo($permissions);
+        $role = null;
+
+        DB::transaction(function () use (&$role, $name, $permissions) {
+            $role = Role::create([
+                'name' => $name,
+            ])
+            ->load('permissions')
+            ->givePermissionTo($permissions);
+        });
+
+        Artisan::call('permission:cache-reset');
+        return $role;
+    }
+
+    /**
+     * Updates a role.
+     *
+     * @param Role $role
+     * @param string $name
+     * @param array $permissions
+     * @return Role
+     */
+    public function update(Role $role, string $name, array $permissions): Role
+    {
+        DB::transaction(function () use ($role, $name, $permissions) {
+            // Revoke all existing permissions
+            $role->revokePermissionTo($role->getAllPermissions());
+
+            // Add new set of permissions
+            $role->givePermissionTo($permissions);
+
+            // Update name of the role
+            $role->update([
+                'name' => $name,
+            ]);
+        });
+
+        if (!$role->relationLoaded('permissions')) {
+            $role->load('permissions');
+        }
+
+        Artisan::call('permission:cache-reset');
+        return $role;
     }
 }

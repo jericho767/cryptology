@@ -33,6 +33,8 @@ return [
     'role' => [
         'playerIsSuperAdmin' => 'Cannot touch an all mighty, you peasant.',
         'ownAccount' => 'Cannot take a selfie bro. It is best that you ask someone to do the "job" for you.',
+        'cannotUpdateOwnRole' => 'You are in this role, you cannot do anything about it, back off.',
+        'cannotUpdateSuperAdmin' => 'You dare touch the all mighty, mortal? Begone thot!',
     ],
 
 ];

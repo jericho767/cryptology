@@ -27,24 +27,47 @@ class Role extends BaseRequest
                 return $this->getRenewRules();
             case 'roles.create':
                 return $this->getCreateRules();
+            case 'roles.update':
+                return $this->getCreateRules($this->getRouteRole());
             default:
                 return [];
         }
     }
 
     /**
+     * Gets the role from the route parameter.
+     *
+     * @return RoleModel
+     */
+    public function getRouteRole(): RoleModel
+    {
+        /** @var RoleModel $role */
+        $role = $this->route('role');
+
+        return $role;
+    }
+
+    /**
      * Gets the rules applied in creating a role.
      *
+     * @param RoleModel|null $exempt
      * @return array
      */
-    private function getCreateRules(): array
+    private function getCreateRules(RoleModel $exempt = null): array
     {
+        // The role that will be exempt in the unique checking
+        if ($exempt !== null) {
+            $unique = 'unique:' . (new RoleModel())->getTable() . ',name,' . $exempt->getAttribute('id');
+        } else {
+            $unique = 'unique:' . (new RoleModel())->getTable() . ',name';
+        }
+
         return [
             'name' => [
                 'required',
                 'min: ' . RoleModel::NAME_MIN_LENGTH,
                 'max: ' . RoleModel::NAME_MAX_LENGTH,
-                'unique:' . (new RoleModel())->getTable() . ',name',
+                $unique,
             ],
             'permissions' => [
                 'array',

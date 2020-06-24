@@ -77,4 +77,23 @@ class RoleController extends Controller
             return new Player($this->roleService->renewRoles($player, $roles));
         });
     }
+
+    /**
+     * Updates a role.
+     *
+     * @param RoleRequest $request
+     * @return array
+     */
+    public function update(RoleRequest $request): array
+    {
+        return $this->respond(function () use ($request) {
+            return new Role(
+                $this->roleService->update(
+                    $request->getRouteRole(),
+                    $request->getName(),
+                    $request->getPermissions()
+                )
+            );
+        });
+    }
 }

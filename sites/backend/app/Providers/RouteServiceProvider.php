@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\GameSetting;
 use App\Models\Player;
+use App\Models\Role;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +39,8 @@ class RouteServiceProvider extends ServiceProvider
     {
         parent::boot();
         Route::model('player', Player::class);
+        Route::model('gameSetting', GameSetting::class);
+        Route::model('role', Role::class);
     }
 
     /**

@@ -28,7 +28,7 @@ Route::group(['middleware' => ['auth:api', 'accept.json']], function () {
         Route::get('{gameSetting}', 'GameSettingController@show')
             ->middleware([
                 'can:' . Permission::ALL['gameSettings.read'],
-                'handle:gameSetting,gameSetting',
+                'handle:gameSettings,gameSetting',
             ])
             ->name('view');
 
@@ -41,7 +41,7 @@ Route::group(['middleware' => ['auth:api', 'accept.json']], function () {
         Route::put('{gameSetting}', 'GameSettingController@update')
             ->middleware([
                 'can:' . Permission::ALL['gameSettings.update'],
-                'handle:gameSetting,gameSetting',
+                'handle:gameSettings,gameSetting',
             ])
             ->name('update');
 
@@ -49,7 +49,7 @@ Route::group(['middleware' => ['auth:api', 'accept.json']], function () {
         Route::delete('{gameSetting}', 'GameSettingController@delete')
             ->middleware([
                 'can:' . Permission::ALL['gameSettings.delete'],
-                'handle:gameSetting,gameSetting',
+                'handle:gameSettings,gameSetting',
             ])
             ->name('delete');
 
@@ -57,7 +57,7 @@ Route::group(['middleware' => ['auth:api', 'accept.json']], function () {
         Route::post('activate/{gameSetting}', 'GameSettingController@activate')
             ->middleware([
                 'can:' . Permission::ALL['gameSettings.activate'],
-                'handle:gameSetting,gameSetting',
+                'handle:gameSettings,gameSetting',
             ])
             ->name('activate');
     });
@@ -77,7 +77,7 @@ Route::group(['middleware' => ['auth:api', 'accept.json']], function () {
         Route::post('renew/{player}', 'RoleController@renew')
             ->middleware([
                 'can:' . Permission::ALL['roles.update'],
-                'loginUserAndRoleAction',
+                'handle:roles,player',
             ])
             ->name('renew');
 
@@ -87,5 +87,13 @@ Route::group(['middleware' => ['auth:api', 'accept.json']], function () {
                 'can:' . Permission::ALL['roles.create'],
             ])
             ->name('create');
+
+        // Update
+        Route::put('{role}', 'RoleController@update')
+            ->middleware([
+                'can:' . Permission::ALL['roles.update'],
+                'handle:roles,role',
+            ])
+            ->name('update');
     });
 });
