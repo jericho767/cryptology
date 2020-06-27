@@ -38,6 +38,24 @@ class BaseRequest extends FormRequest
     }
 
     /**
+     * The same as `get` method of request
+     * but just parsed the value to integer.
+     * Returns `null` if the parameter trying
+     * to get does not exists.
+     *
+     * @param string $key
+     * @return int|null
+     */
+    protected function getInt(string $key): ?int
+    {
+        if ($this->get($key) !== null) {
+            return intval($this->get($key));
+        }
+
+        return null;
+    }
+
+    /**
      * Returns a rule 'exists'.
      *
      * @param string $tableName
@@ -63,7 +81,7 @@ class BaseRequest extends FormRequest
      */
     public function getLimit(): int
     {
-        return $this->get('limit') === null ? self::LIMIT : intval($this->get('limit'));
+        return $this->get('limit') === null ? self::LIMIT : $this->getInt('limit');
     }
 
     /**

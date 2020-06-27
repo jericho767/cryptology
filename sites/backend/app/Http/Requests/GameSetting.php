@@ -175,7 +175,7 @@ class GameSetting extends BaseRequest
      */
     public function getMapSize(): int
     {
-        return intval($this->get('map_size'));
+        return $this->getInt('map_size');
     }
 
     /**
@@ -185,7 +185,7 @@ class GameSetting extends BaseRequest
      */
     public function getGuessCount(): int
     {
-        return intval($this->get('guess_count'));
+        return $this->getInt('guess_count');
     }
 
     /**
@@ -195,7 +195,7 @@ class GameSetting extends BaseRequest
      */
     public function getMaxTeams(): int
     {
-        return intval($this->get('max_teams'));
+        return $this->getInt('max_teams');
     }
 
     /**
@@ -205,7 +205,7 @@ class GameSetting extends BaseRequest
      */
     public function getMinPlayers(): int
     {
-        return intval($this->get('min_players'));
+        return $this->getInt('min_players');
     }
 
     /**
@@ -215,7 +215,7 @@ class GameSetting extends BaseRequest
      */
     public function getMaxPlayers(): int
     {
-        return intval($this->get('max_players'));
+        return $this->getInt('max_players');
     }
 
     /**
@@ -225,7 +225,7 @@ class GameSetting extends BaseRequest
      */
     public function getIsActive(): int
     {
-        return intval($this->get('is_active'));
+        return $this->getInt('is_active');
     }
 
     /**
