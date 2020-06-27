@@ -49,65 +49,65 @@ class GameSetting extends BaseRequest
             'filter.*' => [
                 Rule::in(GameSettingModel::FILTER_BY),
             ],
-            'filter.map_size' => [
+            'filter.' . GameSettingModel::FILTER_BY['map_size'] => [
                 'array',
             ],
-            'filter.map_size.start' => [
+            'filter.' . GameSettingModel::FILTER_BY['map_size'] . '.start' => [
                 'integer',
             ],
-            'filter.map_size.end' => [
+            'filter.' . GameSettingModel::FILTER_BY['map_size'] . '.end' => [
                 'integer',
             ],
-            'filter.guess_count' => [
+            'filter.' . GameSettingModel::FILTER_BY['guess_count'] => [
                 'array',
             ],
-            'filter.guess_count.start' => [
+            'filter.' . GameSettingModel::FILTER_BY['guess_count'] . '.start' => [
                 'integer',
             ],
-            'filter.guess_count.end' => [
+            'filter.' . GameSettingModel::FILTER_BY['guess_count'] . '.end' => [
                 'integer',
             ],
-            'filter.max_teams' => [
+            'filter.' . GameSettingModel::FILTER_BY['max_teams'] => [
                 'array',
             ],
-            'filter.max_teams.start' => [
+            'filter.' . GameSettingModel::FILTER_BY['max_teams'] . '.start' => [
                 'integer',
             ],
-            'filter.max_teams.end' => [
+            'filter.' . GameSettingModel::FILTER_BY['max_teams'] . '.end' => [
                 'integer',
             ],
-            'filter.min_players' => [
+            'filter.' . GameSettingModel::FILTER_BY['min_players'] => [
                 'array',
             ],
-            'filter.min_players.start' => [
+            'filter.' . GameSettingModel::FILTER_BY['min_players'] . '.start' => [
                 'integer',
             ],
-            'filter.min_players.end' => [
+            'filter.' . GameSettingModel::FILTER_BY['min_players'] . '.end' => [
                 'integer',
             ],
-            'filter.max_players' => [
+            'filter.' . GameSettingModel::FILTER_BY['max_players'] => [
                 'array',
             ],
-            'filter.max_players.start' => [
+            'filter.' . GameSettingModel::FILTER_BY['max_players'] . '.start' => [
                 'integer',
             ],
-            'filter.max_players.end' => [
+            'filter.' . GameSettingModel::FILTER_BY['max_players'] . '.end' => [
                 'integer',
             ],
-            'filter.created_by' => [
+            'filter.' . GameSettingModel::FILTER_BY['created_by'] => [
                 'array',
             ],
-            'filter.created_by.*' => [
+            'filter.' . GameSettingModel::FILTER_BY['created_by'] . '.*' => [
                 'integer',
                 $this->ruleExists((new Player())->getTable()),
             ],
-            'filter.created_at' => [
+            'filter.'. GameSettingModel::FILTER_BY['created_at'] => [
                 'array',
             ],
-            'filter.created_at.start' => [
+            'filter.'. GameSettingModel::FILTER_BY['created_at'] . '.start' => [
                 'date_format:' . $this->dateFormat,
             ],
-            'filter.created_at.end' => [
+            'filter.'. GameSettingModel::FILTER_BY['created_at'] . '.end' => [
                 'date_format:' . $this->dateFormat,
             ],
         ] + $this->getBaseListRules(GameSettingModel::SORT_BY);
@@ -287,12 +287,12 @@ class GameSetting extends BaseRequest
     private function validateFilterStartEnd(): void
     {
         // Add the validations for the start and end values of the filters
-        $this->addStartEndValidation('filter.map_size');
-        $this->addStartEndValidation('filter.guess_count');
-        $this->addStartEndValidation('filter.max_teams');
-        $this->addStartEndValidation('filter.min_players');
-        $this->addStartEndValidation('filter.max_players');
-        $this->addStartEndValidation('filter.created_at', true);
+        $this->addStartEndValidation('filter.' . GameSettingModel::FILTER_BY['map_size']);
+        $this->addStartEndValidation('filter.' . GameSettingModel::FILTER_BY['guess_count']);
+        $this->addStartEndValidation('filter.' . GameSettingModel::FILTER_BY['max_teams']);
+        $this->addStartEndValidation('filter.' . GameSettingModel::FILTER_BY['min_players']);
+        $this->addStartEndValidation('filter.' . GameSettingModel::FILTER_BY['max_players']);
+        $this->addStartEndValidation('filter.' . GameSettingModel::FILTER_BY['created_at'], true);
 
         // Run validation
         $this->validator->validate();
