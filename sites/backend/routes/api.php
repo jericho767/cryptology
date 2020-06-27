@@ -96,4 +96,16 @@ Route::group(['middleware' => ['auth:api', 'accept.json']], function () {
             ])
             ->name('update');
     });
+
+    /**
+     * Permissions
+     */
+    Route::group(['prefix' => 'permissions', 'as' => 'permissions.'], function () {
+        // List
+        Route::get('', 'PermissionController@index')
+            ->middleware([
+                'can:' . Permission::ALL['permissions.list'],
+            ])
+            ->name('index');
+    });
 });

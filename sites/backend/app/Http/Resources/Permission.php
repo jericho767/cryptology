@@ -21,7 +21,8 @@ class Permission extends BaseResource
     public function toArray($request): array
     {
         return [
-            'name' => $this->formatter($this->resource->getAttribute('name')),
+            'name' => $this->resource->getAttribute('name'),
+            'displayName' => $this->formatter($this->resource->getAttribute('name')),
         ];
     }
 

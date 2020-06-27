@@ -51,5 +51,7 @@ class Permission extends SpatiePermission
         'roles.update' => 'roles.update',
         'roles.list' => 'roles.list',
         'roles.create' => 'roles.create',
+        // Permissions model
+        'permissions.list' => 'permissions.list',
     ];
 }
