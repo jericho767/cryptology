@@ -150,17 +150,6 @@ class GameSetting extends BaseRequest
                 'min:' . GameSettingModel::ALLOWED_MIN_PLAYERS,
                 'max:' . GameSettingModel::ALLOWED_MAX_PLAYERS,
             ],
-        ] + $this->getIsActiveRules();
-    }
-
-    /**
-     * Gets the rule for the is_active column.
-     *
-     * @return array
-     */
-    private function getIsActiveRules(): array
-    {
-        return [
             'is_active' => [
                 'required',
                 'boolean',
