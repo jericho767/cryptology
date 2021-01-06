@@ -32,7 +32,7 @@ class CheckGameIsRunning
      * @return mixed
      * @throws Exception
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
         /*
          * Fetch `gameId` from the request

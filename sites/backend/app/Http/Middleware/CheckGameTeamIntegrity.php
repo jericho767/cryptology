@@ -32,7 +32,7 @@ class CheckGameTeamIntegrity
      * @return mixed
      * @throws Exception
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
         $params = $request->all(['gameTeamId', 'gameId']);
         // Fetch the gameTeamId

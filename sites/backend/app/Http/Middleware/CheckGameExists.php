@@ -32,7 +32,7 @@ class CheckGameExists
      * @return mixed
      * @throws Exception
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
         $gameId = $request->all('gameId')['gameId'];
 

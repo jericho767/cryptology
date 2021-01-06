@@ -20,7 +20,7 @@ class CheckRequestForJson
      * @return mixed
      * @throws Exception
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
         if ($request->wantsJson()) {
             return $next($request);

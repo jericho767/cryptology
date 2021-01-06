@@ -12,6 +12,7 @@ use Spatie\Permission\Traits\HasRoles;
 /**
  * Class Player
  * @package App\Models
+ * @method static $this find(int $id)
  */
 class Player extends Authenticatable implements MustVerifyEmail
 {

@@ -6,6 +6,7 @@ use App\Http\Kernel;
 use App\Models\Player;
 use App\Models\Role;
 use Closure;
+use Exception;
 use Illuminate\Http\Request;
 
 /**
@@ -22,6 +23,7 @@ class HandleModel
      * @param string $middlewareIndex
      * @param string $model
      * @return void|mixed
+     * @throws Exception
      */
     public function handle(Request $request, Closure $next, string $middlewareIndex, string $model)
     {
